@@ -24,13 +24,21 @@ function App() {
   const [results, setResults] = useState<Recipe[]>([]);
   const [input, setInput] = useState("");
   const [showResults, setShowResults] = useState(false);
+  const [cache, setCache] = useState<Record<string, Recipe>>({});
 
   // Function to fetch data from API
   const fetchData = async () => {
+    // If input already present in cache, return from cache, don't make API call for same input
+    if (cache[input]) {
+      setResults(cache[input]);
+      return;
+    }
+
     const data = await fetch(
       `https://dummyjson.com/recipes/search?q=${input}`
     ).then((res) => res.json());
     setResults(data?.recipes);
+    setCache((prev) => ({ ...prev, [input]: data?.recipes }));
   };
 
   useEffect(() => {
