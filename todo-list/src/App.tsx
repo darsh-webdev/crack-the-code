@@ -66,24 +66,29 @@ function App() {
       {/* Todos Container */}
       <div>
         <ul className="todo-list">
-          {todoList.map((todo) => (
-            <li key={todo.id} className="todo-item">
-              <input
-                type="checkbox"
-                checked={todo.completed}
-                onChange={() => handleTodoToggle(todo.id)}
-              />
-              <span className={`${todo.completed ? "completed-todo" : ""}`}>
-                {todo.text}
-              </span>
-              <button
-                className="delete-btn"
-                onClick={() => handleDeleteTodoItem(todo.id)}
+          {todoList
+            .sort((a, b) => Number(a.completed) - Number(b.completed))
+            .map((todo) => (
+              <li
+                key={todo.id}
+                className={`todo-item ${todo.completed ? "checked" : ""}`}
               >
-                Delete
-              </button>
-            </li>
-          ))}
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => handleTodoToggle(todo.id)}
+                />
+                <span className={`${todo.completed ? "completed-todo" : ""}`}>
+                  {todo.text}
+                </span>
+                <button
+                  className="delete-btn"
+                  onClick={() => handleDeleteTodoItem(todo.id)}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

@@ -58,9 +58,14 @@
   gap: 10px;
   justify-content: space-between;
   align-items: center;
-  background-color: gray;
+  background-color: slategray;
   border-radius: 8px;
   padding: 12px;
+  transition: background-color 0.25s;
+}
+
+.checked {
+  background-color: darkcyan;
 }
 
 .completed-todo {
