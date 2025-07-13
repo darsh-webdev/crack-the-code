@@ -1,0 +1,14 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-size: 22px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.parent {
+  padding-left: 25px;
+}
