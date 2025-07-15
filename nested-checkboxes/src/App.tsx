@@ -69,13 +69,39 @@ const checkboxesData: CheckboxesData = [
 ];
 
 const CheckBoxes = ({ data, checked, setChecked }: CheckBoxesProps) => {
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    node: CheckboxItem
-  ) => {
+  const handleChange = (isChecked: boolean, node: CheckboxItem) => {
     setChecked((prev) => {
-      const newState = { ...prev, [node.id]: e.target.checked };
-      // Todo: If children are present, add all of them to new state
+      const newState = { ...prev, [node.id]: isChecked };
+      // If children are present, add all of them to new state
+      const updateChildren = (node: CheckboxItem) => {
+        node.children?.forEach((child) => {
+          newState[child.id] = isChecked;
+          if (child.children) {
+            updateChildren(child);
+          }
+        });
+      };
+      updateChildren(node);
+
+      // If all children are checked, mark the parent as checked
+      const verifyChecked = (node: CheckboxItem): boolean => {
+        if (!node.children) {
+          return newState[node.id] || false;
+        }
+
+        // Check if all chilren are selected
+        const allChildrenChecked = node.children.every((child) =>
+          verifyChecked(child)
+        );
+        newState[node.id] = allChildrenChecked;
+        return allChildrenChecked;
+      };
+      checkboxesData.forEach((node) => {
+        verifyChecked(node);
+      });
+
+      console.log("New State", newState);
+
       return newState;
     });
   };
@@ -87,7 +113,7 @@ const CheckBoxes = ({ data, checked, setChecked }: CheckBoxesProps) => {
           <input
             type="checkbox"
             checked={checked[node.id] || false}
-            onChange={(e) => handleChange(e, node)}
+            onChange={(e) => handleChange(e.target.checked, node)}
           />
           <span>{node.name}</span>
           {node.children && (
