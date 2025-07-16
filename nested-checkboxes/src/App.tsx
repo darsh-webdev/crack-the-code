@@ -22,48 +22,32 @@ const checkboxesData: CheckboxesData = [
     id: 1,
     name: "Fruits",
     children: [
+      { id: 2, name: "Apple" },
+      { id: 3, name: "Banana" },
       {
-        id: 2,
+        id: 4,
         name: "Citrus",
         children: [
-          {
-            id: 3,
-            name: "Orange",
-          },
-          {
-            id: 4,
-            name: "Lemon",
-          },
+          { id: 5, name: "Orange" },
+          { id: 6, name: "Lemon" },
         ],
       },
       {
-        id: 5,
+        id: 7,
         name: "Berries",
         children: [
-          {
-            id: 6,
-            name: "Strawberry",
-          },
-          {
-            id: 7,
-            name: "Cranberry",
-          },
+          { id: 8, name: "Blueberry" },
+          { id: 9, name: "Cranberry" },
         ],
       },
     ],
   },
   {
-    id: 8,
+    id: 10,
     name: "Vegetables",
     children: [
-      {
-        id: 9,
-        name: "Carrot",
-      },
-      {
-        id: 10,
-        name: "Potato",
-      },
+      { id: 11, name: "Carrot" },
+      { id: 12, name: "Broccoli" },
     ],
   },
 ];
@@ -99,8 +83,6 @@ const CheckBoxes = ({ data, checked, setChecked }: CheckBoxesProps) => {
       checkboxesData.forEach((node) => {
         verifyChecked(node);
       });
-
-      console.log("New State", newState);
 
       return newState;
     });
