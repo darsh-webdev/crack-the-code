@@ -1,6 +1,6 @@
 import type { TabFormProps } from "./TabForm";
 
-const Profile = ({ data, setData }: TabFormProps) => {
+const Profile = ({ data, setData, errors }: TabFormProps) => {
   const { name, email, age } = data;
 
   const handleDataChange = (
@@ -14,8 +14,8 @@ const Profile = ({ data, setData }: TabFormProps) => {
   };
 
   return (
-    <div>
-      <div>
+    <div className="form-input-container">
+      <div className="form-input">
         <label>Name: </label>
         <input
           type="text"
@@ -23,8 +23,9 @@ const Profile = ({ data, setData }: TabFormProps) => {
           value={name}
           onChange={(e) => handleDataChange(e, "name")}
         />
+        {errors.name && <span className="error">{errors.name}</span>}
       </div>
-      <div>
+      <div className="form-input">
         <label>Age: </label>
         <input
           type="number"
@@ -32,8 +33,9 @@ const Profile = ({ data, setData }: TabFormProps) => {
           value={age}
           onChange={(e) => handleDataChange(e, "age")}
         />
+        {errors.age && <span className="error">{errors.age}</span>}
       </div>
-      <div>
+      <div className="form-input">
         <label>Email: </label>
         <input
           type="email"
@@ -41,6 +43,7 @@ const Profile = ({ data, setData }: TabFormProps) => {
           value={email}
           onChange={(e) => handleDataChange(e, "email")}
         />
+        {errors.email && <span className="error">{errors.email}</span>}
       </div>
     </div>
   );

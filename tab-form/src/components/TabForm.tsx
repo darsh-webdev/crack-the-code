@@ -10,26 +10,19 @@ export interface FormData {
   interests: string[];
   theme: string;
 }
+export type FormDataErrors = {
+  name: string;
+  age: string;
+  email: string;
+  interests: string;
+  theme: string;
+};
 
 export type TabFormProps = {
   data: FormData;
   setData: React.Dispatch<React.SetStateAction<FormData>>;
+  errors: FormDataErrors;
 };
-
-const tabs = [
-  {
-    name: "Profile",
-    component: Profile,
-  },
-  {
-    name: "Interests",
-    component: Interests,
-  },
-  {
-    name: "Settings",
-    component: Settings,
-  },
-];
 
 const TabForm = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -40,19 +33,75 @@ const TabForm = () => {
     interests: [],
     theme: "dark",
   });
+  const [errors, setErrors] = useState<FormDataErrors>({
+    name: "",
+    age: "",
+    email: "",
+    interests: "",
+    theme: "",
+  });
+
+  const tabs = [
+    {
+      name: "Profile",
+      component: Profile,
+      validate: () => {
+        const err = {} as FormDataErrors;
+        if (!formData.name || formData.name.length < 2) {
+          err.name = "Name is not valid";
+        }
+        if (!formData.age || Number(formData.age) < 18) {
+          err.age = "Age is not valid";
+        }
+        if (!formData.email || formData.email.length < 2) {
+          err.email = "Email is not valid";
+        }
+        setErrors(err);
+        return err.name || err.age || err.email ? false : true;
+      },
+    },
+    {
+      name: "Interests",
+      component: Interests,
+      validate: () => {
+        const err = {} as FormDataErrors;
+        if (formData.interests.length < 1) {
+          err.interests = "Select atleast one interest";
+        }
+
+        setErrors(err);
+        return err.interests ? false : true;
+      },
+    },
+    {
+      name: "Settings",
+      component: Settings,
+      validate: () => {
+        return true;
+      },
+    },
+  ];
 
   const ActiveTabComponent = tabs[activeTab].component;
 
+  const isDataValidated = () => {
+    return tabs[activeTab].validate();
+  };
+
   const handleNextClick = () => {
-    setActiveTab((prev) => prev + 1);
+    if (isDataValidated()) {
+      setActiveTab((prev) => prev + 1);
+    }
   };
 
   const handlePrevClick = () => {
-    setActiveTab((prev) => prev - 1);
+    if (isDataValidated()) {
+      setActiveTab((prev) => prev - 1);
+    }
   };
 
   const handleSubmitClick = () => {
-    console.log("Data", formData);
+    console.log("Submitted Data: ", formData);
   };
 
   return (
@@ -61,7 +110,7 @@ const TabForm = () => {
         {tabs.map((tab, index) => (
           <div
             key={index}
-            className="heading"
+            className={`${activeTab === index ? "bg-color" : ""} heading`}
             onClick={() => setActiveTab(index)}
           >
             {tab.name}
@@ -69,15 +118,27 @@ const TabForm = () => {
         ))}
       </div>
       <div className="tab-body">
-        <ActiveTabComponent data={formData} setData={setFormData} />
+        <ActiveTabComponent
+          data={formData}
+          setData={setFormData}
+          errors={errors}
+        />
       </div>
       <div className="action-btns">
-        {activeTab > 0 && <button onClick={handlePrevClick}>Previous</button>}
+        {activeTab > 0 && (
+          <button onClick={handlePrevClick} className="action-btn">
+            Previous
+          </button>
+        )}
         {activeTab < tabs.length - 1 && (
-          <button onClick={handleNextClick}>Next</button>
+          <button onClick={handleNextClick} className="action-btn">
+            Next
+          </button>
         )}
         {activeTab === tabs.length - 1 && (
-          <button onClick={handleSubmitClick}>Submit</button>
+          <button onClick={handleSubmitClick} className="action-btn">
+            Submit
+          </button>
         )}
       </div>
     </div>

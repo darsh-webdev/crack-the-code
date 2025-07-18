@@ -1,6 +1,6 @@
 import type { TabFormProps } from "./TabForm";
 
-const Interests = ({ data, setData }: TabFormProps) => {
+const Interests = ({ data, setData, errors }: TabFormProps) => {
   const { interests } = data;
 
   const handleChecked = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,41 +13,45 @@ const Interests = ({ data, setData }: TabFormProps) => {
   };
 
   return (
-    <div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            name="coding"
-            checked={interests.includes("coding")}
-            onChange={handleChecked}
-          />
-          Coding
-        </label>
+    <>
+      <span>Choose your interests:</span>
+      <div className="form-input-container">
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              name="coding"
+              checked={interests.includes("coding")}
+              onChange={handleChecked}
+            />
+            Coding
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              name="music"
+              checked={interests.includes("music")}
+              onChange={handleChecked}
+            />
+            Music
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              name="reading"
+              checked={interests.includes("reading")}
+              onChange={handleChecked}
+            />
+            Reading
+          </label>
+        </div>
+        {errors.interests && <span className="error">{errors.interests}</span>}
       </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            name="music"
-            checked={interests.includes("music")}
-            onChange={handleChecked}
-          />
-          Music
-        </label>
-      </div>
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            name="reading"
-            checked={interests.includes("reading")}
-            onChange={handleChecked}
-          />
-          Reading
-        </label>
-      </div>
-    </div>
+    </>
   );
 };
 

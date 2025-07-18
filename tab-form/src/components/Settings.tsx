@@ -8,30 +8,33 @@ const Settings = ({ data, setData }: TabFormProps) => {
   };
 
   return (
-    <div>
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="dark"
-            checked={theme === "dark"}
-            onChange={handleDataChange}
-          />
-          Dark
-        </label>
+    <>
+      <span>Choose your theme: </span>
+      <div className="form-input-container">
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="dark"
+              checked={theme === "dark"}
+              onChange={handleDataChange}
+            />
+            Dark
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="light"
+              checked={theme === "light"}
+              onChange={handleDataChange}
+            />
+            Light
+          </label>
+        </div>
       </div>
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="light"
-            checked={theme === "light"}
-            onChange={handleDataChange}
-          />
-          Light
-        </label>
-      </div>
-    </div>
+    </>
   );
 };
 
