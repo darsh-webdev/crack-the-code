@@ -37,3 +37,37 @@
   width: 200px;
   height: 200px;
 }
+
+.pagination-container {
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-number {
+  padding: 5px;
+  margin: 2px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.page-number:hover {
+  background-color: gray;
+}
+
+.page-number.active {
+  background-color: teal;
+}
+
+.page-number button {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
