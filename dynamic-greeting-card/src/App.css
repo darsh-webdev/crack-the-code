@@ -1,0 +1,31 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.modal-content {
+  width: 180px;
+  height: 180px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.greeting {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.updated-time {
+  font-size: 1.5rem;
+  font-weight: 900;
+  background-color: lightgray;
+  color: black;
+  border-radius: 8px;
+  padding: 4px 8px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
