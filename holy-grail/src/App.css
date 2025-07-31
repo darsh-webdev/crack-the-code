@@ -1,0 +1,60 @@
+body {
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+header,
+nav,
+main,
+aside,
+footer {
+  padding: 12px;
+}
+
+header {
+  background-color: tomato;
+  height: 60px;
+}
+
+nav {
+  background-color: coral;
+}
+
+main {
+  background-color: moccasin;
+  flex-grow: 1;
+}
+
+aside {
+  background-color: sandybrown;
+}
+
+footer {
+  background-color: slategray;
+  height: 100px;
+}
+
+nav,
+aside {
+  flex-shrink: 0;
+  width: 100px;
+}
+
+nav,
+main,
+aside {
+  height: calc(100vh - 160px);
+}
+
+.columns {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
