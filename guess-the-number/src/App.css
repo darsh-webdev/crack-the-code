@@ -1,0 +1,62 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.container {
+  max-width: 500px;
+  margin: 50px auto;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.action-btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: fit-parent;
+  margin-top: 20px;
+  gap: 60px;
+}
+
+button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease-in-out;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:disabled {
+  opacity: 0.6;
+  transform: scale(1);
+}
+
+.guess-btn {
+  background-color: green;
+  color: #f0f0f0;
+}
+
+.reset-btn {
+  background-color: red;
+  color: #f0f0f0;
+}
+
+.result {
+  font-size: 15px;
+  margin-top: 30px;
+  text-align: center;
+  font-weight: 500;
+}
