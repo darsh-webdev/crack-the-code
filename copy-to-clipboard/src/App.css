@@ -1,0 +1,96 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.copyToClipboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.copyToClipboard > h1 {
+  margin: 1rem 0;
+  color: #033857;
+}
+
+.copyToClipboard > p {
+  margin-bottom: 1rem;
+}
+
+.copyToClipboard-container {
+  border: 2px solid #a0b0ff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  background: #ffffffdd;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+input[type="text"] {
+  padding: 8px;
+  margin: 0 10px;
+  border-radius: 8px;
+  border: 2px solid #a0b0ff;
+  background: #f9faff;
+  color: #222;
+}
+
+input:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 8px #4f46e566;
+  background: #fff;
+  outline: none;
+}
+
+.btn {
+  padding: 8px 10px;
+  margin: 10px 0;
+  width: 4rem;
+  background: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+}
+
+.btn:hover {
+  background: #3730a3;
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
+}
+
+.message {
+  margin: 10px 0;
+  color: green;
+}
+
+.errorMessage {
+  color: red;
+  margin: 10px 0;
+}
+
+.ex-para {
+  display: flex;
+  gap: 10px;
+}
+
+.ex-para > button {
+  cursor: pointer;
+}
+
+.examples {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
