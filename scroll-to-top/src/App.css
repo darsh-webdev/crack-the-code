@@ -1,0 +1,31 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.backToTop {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.backtotop-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #fefefe;
+  background-color: teal;
+  font-size: 14px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: 2px solid rgb(0, 107, 107);
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out;
+  font-family: "Poppins", sans-serif;
+}
+
+.backtotop-btn:hover {
+  transform: scale(1.05);
+}
