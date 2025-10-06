@@ -1,0 +1,71 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  margin-bottom: 28px;
+  color: #134140;
+  text-align: center;
+}
+
+.undoRedo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  width: 300px;
+  text-align: center;
+  background-color: #e6f0f3;
+  padding: 40px;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  color: #1f3a3a;
+}
+
+.textarea {
+  width: 180px;
+  height: 40px;
+  padding: 5px 10px;
+}
+
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.buttons button {
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 3px 8px rgba(47, 79, 79, 0.07);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 16px;
+}
+
+.undo {
+  background-color: #f44336;
+  color: white;
+}
+
+.redo {
+  background-color: #4caf50;
+  color: white;
+}
+
+.buttons button:hover {
+  opacity: 0.8;
+}
+
+.buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
