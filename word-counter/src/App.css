@@ -1,0 +1,52 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.wordCounter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #b6b09f;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid #8f8875;
+}
+
+.container {
+  padding: 10px;
+}
+
+.textarea {
+  width: 300px;
+  height: 40px;
+  padding: 10px 15px;
+  color: #000;
+  background-color: #eae4d5;
+  border-radius: 10px;
+  border: 1px solid #000;
+}
+
+.textarea::placeholder {
+  color: #4b4b4b;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+ul li {
+  list-style-type: square;
+}
+
+li {
+  text-align: left;
+  margin: 5px 0;
+}
