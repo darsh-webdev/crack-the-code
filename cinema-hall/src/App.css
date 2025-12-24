@@ -66,7 +66,7 @@
 }
 
 /* Seats */
-.col {
+.seat {
   width: 28px;
   height: 28px;
   border-radius: 6px;
@@ -78,11 +78,11 @@
   color: #bbb;
   cursor: pointer;
   transition: all 0.2s ease;
+  border: none;
 }
 
-.col:hover {
+.seat:hover {
   transform: scale(1.15);
-  background: #5c5f75;
 }
 
 .selected-seat {
@@ -91,6 +91,6 @@
 }
 
 .disabled-seat {
-  background: #2a2c3b;
+  background: #21232f;
   pointer-events: none;
 }
