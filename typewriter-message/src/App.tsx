@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
 const messages = [
@@ -15,22 +15,48 @@ function App() {
   const [isTyping, setIsTyping] = useState(false);
   const [showSkip, setShowSkip] = useState(false);
 
+  const currentMessage = useMemo(
+    () => messages[currentMessageIndex],
+    [currentMessageIndex]
+  );
+
   const startTyping = () => {
-    // TODO: Implement start typing logic
+    setIsTyping(true);
+    setShowSkip(true);
+    setDisplayedText("");
   };
 
   const skipTyping = () => {
-    // TODO: Implement skip typing logic
+    setIsTyping(false);
+    setShowSkip(false);
+    setDisplayedText(currentMessage);
   };
 
   const nextMessage = () => {
-    // TODO: Implement next message logic
+    const nextMessage = (currentMessageIndex + 1) % messages.length;
+    setCurrentMessageIndex(nextMessage);
+    setDisplayedText("");
+    setIsTyping(false);
+    setShowSkip(false);
   };
 
-  // TODO: Implement useEffect with setInterval for typewriter effect
   useEffect(() => {
-    // TODO: Add setInterval logic here
-  }, []);
+    if (!isTyping) return;
+
+    const interval = setInterval(() => {
+      setDisplayedText((prev) => {
+        if (prev.length >= currentMessage.length) {
+          setIsTyping(false);
+          setShowSkip(false);
+          return prev;
+        }
+
+        return currentMessage.slice(0, prev.length + 1);
+      });
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [currentMessage, isTyping]);
 
   return (
     <div className="typewriter-container">
@@ -42,8 +68,12 @@ function App() {
       </div>
 
       <div className="controls">
-        <button onClick={startTyping} className="start-button">
-          Start
+        <button
+          onClick={startTyping}
+          className="start-button"
+          disabled={isTyping}
+        >
+          Start Typing
         </button>
 
         {showSkip && (
@@ -52,8 +82,12 @@ function App() {
           </button>
         )}
 
-        <button onClick={nextMessage} className="next-button">
-          Next
+        <button
+          onClick={nextMessage}
+          className="next-button"
+          disabled={isTyping}
+        >
+          Next Message
         </button>
       </div>
 
