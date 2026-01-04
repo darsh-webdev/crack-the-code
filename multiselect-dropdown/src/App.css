@@ -30,13 +30,20 @@
   margin-bottom: 10px;
   font-size: 1.05rem;
   color: #4a5a7a;
+  text-align: left;
+}
+
+.dropdown-wrapper {
+  position: relative;
+  user-select: none;
 }
 
 .dropdown-toggle {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 10px;
   background-color: #f7faff;
   border: 1.8px solid #9bb4d4;
   border-radius: 8px;
@@ -45,6 +52,22 @@
   color: #344675;
   cursor: pointer;
   transition: border-color 0.25s ease, background-color 0.3s ease;
+}
+
+.dropdown-toggle:hover,
+.dropdown-toggle:focus {
+  border-color: #3a76f0;
+  background-color: #e4ecff;
+  outline: none;
+}
+
+.dropdown-button-label {
+  flex-grow: 1;
+  text-align: left;
+  margin-left: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dropdown-menu {
@@ -74,6 +97,11 @@
   transition: background-color 0.25s ease;
 }
 
+.dropdown-reset:hover {
+  background-color: #fceaea;
+  color: #b93636;
+}
+
 .dropdown-option {
   padding: 3px 18px;
   cursor: pointer;
@@ -83,6 +111,26 @@
   font-size: 1rem;
   user-select: none;
   transition: background-color 0.25s ease;
+}
+
+.dropdown-option:hover {
+  background-color: #e8f0ff;
+}
+
+.dropdown-option.selected {
+  background-color: #c6dafc;
+  color: #1f4ed8;
+}
+
+.check-icon {
+  margin-right: 10px;
+  color: #3a76f0;
+  flex-shrink: 0;
+}
+
+.dropdown-option input[type="checkbox"] {
+  margin-right: 10px;
+  pointer-events: none;
 }
 
 .submit-button {
@@ -104,4 +152,20 @@
   background-color: #2a56d6;
   outline: none;
   box-shadow: 0 5px 12px rgba(42, 86, 198, 0.7);
+}
+
+.result-area {
+  margin-top: 22px;
+  min-height: 28px;
+  font-size: 1.1rem;
+  color: #1b2a48;
+}
+
+.error-message {
+  color: #d93025;
+  margin: 0;
+}
+
+.selected-options strong {
+  color: #3a76f0;
 }
