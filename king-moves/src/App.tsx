@@ -5,8 +5,17 @@ const boardSize = 8;
 
 function App() {
   const [hovered, setHovered] = useState<number[] | null>(null);
+
   const isHoveredSquare = (row: number, col: number) => {
     return hovered && hovered[0] === row && hovered[1] === col;
+  };
+
+  const isKingMove = (row: number, col: number) => {
+    if (!hovered) return false;
+    const [hr, hc] = hovered;
+    const rowDiff = Math.abs(hr - row);
+    const colDiff = Math.abs(hc - col);
+    return !isHoveredSquare(row, col) && rowDiff <= 1 && colDiff <= 1;
   };
 
   const renderBoard = () => {
@@ -18,6 +27,8 @@ function App() {
 
         if (isHoveredSquare(row, col)) {
           cellClasses += " hovered";
+        } else if (isKingMove(row, col)) {
+          cellClasses += " king-move";
         }
 
         board.push(
