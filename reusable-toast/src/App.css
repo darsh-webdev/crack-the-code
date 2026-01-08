@@ -5,6 +5,18 @@
   text-align: center;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: start;
+  align-items: center;
+  min-height: 100vh;
+  top: 20px;
+  right: 20px;
+  width: 100%;
+}
+
 .toast-btns {
   display: flex;
   flex-direction: row;
@@ -27,4 +39,13 @@ button {
 button:hover {
   background-color: #006666;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toast {
+  padding: 10px 20px;
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+  z-index: 1000;
+  width: 200px;
 }
