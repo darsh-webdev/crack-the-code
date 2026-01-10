@@ -2,19 +2,37 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  // TODO: Create a state variable isOpen and setIsOpen using useState
+  const [isOpen, setIsOpen] = useState(false);
 
-  // TODO: Create functions handleOpen and handleClose to toggle modal visibility
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div style={{ textAlign: "center", padding: "50px", height: "100vh" }}>
       <h1>Modal Popup</h1>
+      <button onClick={handleOpen}>Open Modal</button>
 
-      <button>Open Modal</button>
-
-      {/* TODO: Conditionally render the modal when isOpen is true */}
-      {/* Modal should close when clicking the backdrop or the Close button */}
-      {/* Modal content should not close when clicking inside */}
+      {/* Modal  */}
+      {isOpen && (
+        <div
+          data-testid="modal-backdrop"
+          className="modal-container"
+          onMouseDown={handleClose}
+        >
+          <div className="modal" onMouseDown={(e) => e.stopPropagation()}>
+            <h2>Modal Header</h2>
+            <div>
+              <p>This is the modal body</p>
+              <button onClick={handleClose}>Close</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
