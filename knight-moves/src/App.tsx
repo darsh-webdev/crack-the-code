@@ -3,12 +3,39 @@ import "./App.css";
 
 const boardSize = 8;
 
+const getKnightMoves = (row: number, col: number) => {
+  if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) return [];
+
+  const isValidMove = (row: number, col: number) =>
+    row >= 0 && row < boardSize && col >= 0 && col < boardSize;
+
+  const knightOffsets = [
+    [2, 1],
+    [2, -1],
+    [-2, 1],
+    [-2, -1],
+    [1, 2],
+    [1, -2],
+    [-1, 2],
+    [-1, -2],
+  ];
+
+  return knightOffsets
+    .map(([dRow, dCol]) => [row + dRow, col + dCol])
+    .filter(([row, col]) => isValidMove(row, col));
+};
+
 function App() {
   const [hovered, setHovered] = useState<number[] | null>(null);
+
+  const knightMoves = hovered ? getKnightMoves(hovered[0], hovered[1]) : [];
 
   const isHoveredSquare = (row: number, col: number) => {
     return hovered && hovered[0] === row && hovered[1] === col;
   };
+
+  const isKnightMove = (row: number, col: number) =>
+    knightMoves.some(([r, c]) => r === row && c === col);
 
   const renderBoard = () => {
     const board = [];
@@ -19,6 +46,8 @@ function App() {
 
         if (isHoveredSquare(row, col)) {
           cellClasses += " hovered";
+        } else if (isKnightMove(row, col)) {
+          cellClasses += " knight-move";
         }
 
         board.push(
