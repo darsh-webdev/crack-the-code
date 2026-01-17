@@ -55,3 +55,16 @@
   color: white;
   border-radius: 5px;
 }
+
+.undo-btn:hover {
+  background-color: #d12c2c;
+}
+
+.redo-btn:hover {
+  background-color: #267dd5;
+}
+
+.undo-btn:disabled,
+.redo-btn:disabled {
+  background-color: #727272;
+}
