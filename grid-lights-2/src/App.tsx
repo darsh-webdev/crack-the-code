@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 const TOTAL = 9;
@@ -6,20 +6,44 @@ const GRID_SIZE = 3;
 
 function App() {
   const [activeCells, setActiveCells] = useState(new Set());
-  const [activationOrder, setActivationOrder] = useState([]);
+  const [activationOrder, setActivationOrder] = useState<number[]>([]);
   const [isDeactivating, setIsDeactivating] = useState(false);
 
   const handleClick = (index: number) => {
-    // TODO: Implement click logic
+    if (isDeactivating || activeCells.has(index)) return;
+    setActiveCells((prev) => new Set([...prev, index]));
+    setActivationOrder((prev) => [...prev, index]);
   };
 
-  const startReverseDeactivation = (order) => {
-    // TODO: Implement reverse deactivation
+  const startReverseDeactivation = (order: number[]) => {
+    setIsDeactivating(true);
+    let i = order.length;
+
+    const intervalId = setInterval(() => {
+      setActiveCells((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(order[i]);
+        return newSet;
+      });
+      i--;
+      if (i < 0) {
+        clearInterval(intervalId);
+        setIsDeactivating(false);
+      }
+    }, 300);
   };
 
   const resetGrid = () => {
-    // TODO: Implement reset logic
+    setActiveCells(new Set());
+    setActivationOrder([]);
+    setIsDeactivating(false);
   };
+
+  useEffect(() => {
+    if (activeCells.size === TOTAL) {
+      startReverseDeactivation(activationOrder);
+    }
+  }, [activeCells, activationOrder]);
 
   return (
     <div className="main-container">
@@ -39,7 +63,9 @@ function App() {
               return (
                 <div
                   key={index}
-                  className="cell col"
+                  className={`cell col ${
+                    activeCells.has(index) ? "active" : ""
+                  }`}
                   onClick={() => handleClick(index)}
                   data-testid={`cell-${index}`}
                 ></div>
