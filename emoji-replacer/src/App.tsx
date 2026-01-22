@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 
 // ✅ Provided Emoji Mapping
-const emojiMap = {
+const emojiMap: Record<string, string> = {
   // Emotions
   happy: "😊",
   sad: "😢",
@@ -70,10 +70,20 @@ const emojiMap = {
   clock: "⏰",
 };
 
-// TODO: Implement this function
 function replaceWithEmojis(input: string) {
   // Replace whole words (case-insensitive) using the emojiMap
   // Return updated text with emojis
+  const words = input.match(/[a-zA-Z]+|[^a-zA-Z\s]/g);
+  if (!words) return input;
+  return words
+    .map((word) => {
+      const lowerWord = word.toLowerCase();
+      if (emojiMap[lowerWord]) {
+        return emojiMap[lowerWord];
+      }
+      return word.trim();
+    })
+    .join(" ");
 }
 
 function App() {
@@ -103,7 +113,7 @@ function App() {
 
       <h2>Output:</h2>
       <div className="output-box" data-testid="output-box">
-        {/* TODO: Render replaced text using replaceWithEmojis */}
+        {replaceWithEmojis(text)}
       </div>
     </div>
   );
