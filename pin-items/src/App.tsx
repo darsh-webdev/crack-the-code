@@ -13,14 +13,31 @@ function App() {
     { id: 8, text: "Review pull requests", pinned: false },
   ]);
 
+  const togglePin = (id: number) => {
+    setItems((prevItems) => {
+      return prevItems.map((item) =>
+        item.id === id ? { ...item, pinned: !item.pinned } : item,
+      );
+    });
+  };
+
+  const sortedItems = [
+    ...items.filter((item) => item.pinned),
+    ...items.filter((item) => !item.pinned),
+  ];
+
   return (
     <div className="container" data-testid="app-container">
       <h1 data-testid="main-title">Pin Items To Top</h1>
       <ul data-testid="item-list">
-        {items.map((item) => (
+        {sortedItems.map((item) => (
           <li key={item.id} className={item.pinned ? "pinned" : ""}>
             <label>
-              <input type="checkbox" data-testid={`pin-checkbox-${item.id}`} />
+              <input
+                type="checkbox"
+                data-testid={`pin-checkbox-${item.id}`}
+                onChange={() => togglePin(item.id)}
+              />
               {item.text}
             </label>
           </li>
