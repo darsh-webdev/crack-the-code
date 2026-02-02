@@ -1,23 +1,27 @@
 import { useState } from "react";
-
 import "./App.css";
 
 function App() {
-  // Step 1: Create state variables
-  // use `rating` to store the selected rating, and `setRating` to update it
+  const [rating, setRating] = useState(0);
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div className="container">
       <h1>Star Rating</h1>
-      <h3>by NamasteDev</h3>
-
-      {/* Step 2: Render 5 stars using a loop ★★★★★ */}
-      {/* Step 3: Update rating when a star is clicked */}
-      {/* Step 4: Style stars based on rating */}
-
-      {/* Step 5: Display current rating */}
-
-      {/* Step 6: Add a Reset button to clear the rating */}
+      <div className="stars-container">
+        {[1, 2, 3, 4, 5].map((star, index) => (
+          <div
+            key={star}
+            className={`star ${index < rating ? "filled" : ""}`}
+            onClick={() => setRating(star)}
+          >
+            ★
+          </div>
+        ))}
+      </div>
+      <div className="rating-text">Current Rating: {rating}</div>
+      <button className="reset-btn" onClick={() => setRating(0)}>
+        Reset Rating
+      </button>
     </div>
   );
 }
