@@ -113,46 +113,97 @@ function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // TODO: Implement getRatingColor function
   const getRatingColor = (rating: number) => {
-    // TODO: Return color based on rating
     // - 4.5+ rating: Green (#4CAF50)
     // - 4.0+ rating: Light Green (#8BC34A)
     // - 3.5+ rating: Yellow (#FFC107)
     // - 3.0+ rating: Orange (#FF9800)
     // - Below 3.0: Red (#F44336)
+
+    if (rating >= 4.5) {
+      return "#4CAF50";
+    } else if (rating >= 4.0) {
+      return "#8BC34A";
+    } else if (rating >= 3.5) {
+      return "#FFC107";
+    } else if (rating >= 3.0) {
+      return "#FF9800";
+    } else {
+      return "#F44336";
+    }
   };
 
-  // TODO: Implement getRatingIntensity function
   const getRatingIntensity = (rating: number) => {
-    // TODO: Return opacity/intensity based on rating
     // - Higher ratings should have higher intensity (opacity)
     // - Lower ratings should have lower intensity
+    if (rating >= 4.5) {
+      return 1.0;
+    } else if (rating >= 4.0) {
+      return 0.8;
+    } else if (rating >= 3.5) {
+      return 0.6;
+    } else if (rating >= 3.0) {
+      return 0.4;
+    } else {
+      return 0.2;
+    }
   };
 
-  // TODO: Implement handleProductClick function
   const handleProductClick = (product: Product) => {
-    // TODO: Set selected product and open modal
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
-  // TODO: Implement handleCloseModal function
   const handleCloseModal = () => {
-    // TODO: Close modal and clear selected product
+    setSelectedProduct(null);
+    setIsModalOpen(false);
   };
 
-  // TODO: Implement handleBackdropClick function
-  const handleBackdropClick = (e) => {
-    // TODO: Close modal when clicking backdrop
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // - Check if click target is the backdrop itself
+    if (e.target === e.currentTarget) {
+      handleCloseModal();
+    }
   };
 
-  // TODO: Implement renderStars function
   const renderStars = (rating: number) => {
-    // TODO: Render star rating display
     // - Full stars for whole numbers
     // - Half star for 0.5 ratings
     // - Empty stars to fill up to 5
     // - Return array of star elements
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating - fullStars >= 0.5;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <span key={i} className="star filled">
+          ★
+        </span>,
+      );
+    }
+
+    if (hasHalfStar) {
+      stars.push(
+        <span key="half" className="star half">
+          ★
+        </span>,
+      );
+    }
+
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(
+        <span
+          key={fullStars + i + (hasHalfStar ? 1 : 0)}
+          className="star empty"
+        >
+          ☆
+        </span>,
+      );
+    }
+
+    return stars;
   };
 
   return (
@@ -164,7 +215,6 @@ function App() {
 
       <div className="product-grid" data-testid="product-grid">
         {products.map((product) => {
-          // TODO: Calculate color and intensity based on rating
           const color = getRatingColor(product.rating);
           const intensity = getRatingIntensity(product.rating);
 
@@ -192,7 +242,6 @@ function App() {
         })}
       </div>
 
-      {/* TODO: Implement modal */}
       {isModalOpen && selectedProduct && (
         <div
           className="modal-backdrop"
