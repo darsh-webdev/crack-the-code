@@ -5,12 +5,15 @@
   text-align: center;
 }
 
-* Notification Bell Styles */ .notification-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 40px 20px;
+.notification-container {
+  background: white;
+  max-width: 600px;
+  margin: auto;
+  padding: 40px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .notification-container h1 {
@@ -216,7 +219,7 @@
 }
 
 .stats {
-  background: #f8f9fa;
+  background: #eaeaea;
   padding: 20px;
   border-radius: 8px;
   margin-top: 20px;

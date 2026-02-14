@@ -49,46 +49,61 @@ const notifications = [
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [notificationList, setNotificationList] = useState(notifications);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // TODO: Calculate unread count
   const unreadCount = notificationList.filter(
     (notification) => !notification.isRead,
   ).length;
 
-  // TODO: Implement handleBellClick function
   const handleBellClick = () => {
-    // TODO: Toggle dropdown open/closed state
+    setIsOpen((prev) => !prev);
   };
 
-  // TODO: Implement handleNotificationClick function
-  const handleNotificationClick = (notificationId) => {
-    // TODO: Mark specific notification as read
+  const handleNotificationClick = (notificationId: number) => {
     // - Find notification by ID
     // - Update isRead property to true
     // - Update notificationList state
+    setNotificationList((prevList) =>
+      prevList.map((notification) =>
+        notification.id === notificationId
+          ? { ...notification, isRead: true }
+          : notification,
+      ),
+    );
   };
 
-  // TODO: Implement handleMarkAllAsRead function
   const handleMarkAllAsRead = () => {
-    // TODO: Mark all notifications as read
     // - Update all notifications to have isRead: true
     // - Update notificationList state
+    setNotificationList((prevList) =>
+      prevList.map((notification) => ({ ...notification, isRead: true })),
+    );
   };
 
-  // TODO: Implement formatTimestamp function
-  const formatTimestamp = (timestamp) => {
-    // TODO: Format timestamp for display
+  const formatTimestamp = (timestamp: string) => {
     // - Return the timestamp as is for now
     // - Could add more formatting logic later
+    return timestamp;
   };
 
-  // TODO: Implement click outside handler
   useEffect(() => {
-    // TODO: Add event listener for clicks outside dropdown
     // - Close dropdown when clicking outside
     // - Use dropdownRef to check if click is outside
     // - Clean up event listener on unmount
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   return (
@@ -107,7 +122,6 @@ function App() {
             🔔
           </button>
 
-          {/* TODO: Show badge only when there are unread notifications */}
           {unreadCount > 0 && (
             <span
               className="notification-badge"
@@ -117,7 +131,6 @@ function App() {
             </span>
           )}
 
-          {/* TODO: Show dropdown when isOpen is true */}
           {isOpen && (
             <div
               className="notification-dropdown"
@@ -125,7 +138,7 @@ function App() {
             >
               <div className="dropdown-header">
                 <h3>Notifications</h3>
-                {/* TODO: Show mark all button only when there are unread notifications */}
+
                 {unreadCount > 0 && (
                   <button
                     className="mark-all-button"
@@ -137,7 +150,6 @@ function App() {
               </div>
 
               <div className="notification-list">
-                {/* TODO: Handle empty state */}
                 {notificationList.length === 0 ? (
                   <div className="empty-state">
                     <p>No notifications</p>
@@ -163,7 +175,6 @@ function App() {
                           {formatTimestamp(notification.timestamp)}
                         </span>
                       </div>
-                      {/* TODO: Show unread indicator only for unread notifications */}
                       {!notification.isRead && (
                         <div className="unread-indicator"></div>
                       )}
