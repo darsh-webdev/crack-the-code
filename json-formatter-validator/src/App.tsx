@@ -8,19 +8,50 @@ function App() {
   const [success, setSuccess] = useState("");
 
   const handleFormat = () => {
-    // TODO: Implement format logic
+    try {
+      const parsed = JSON.parse(input);
+      setFormatted(JSON.stringify(parsed, null, 2));
+      setSuccess("JSON formatted successfully!");
+      setError("");
+    } catch (err) {
+      setError("Invalid JSON: " + err.message);
+      setFormatted("");
+      setSuccess("");
+    }
   };
 
   const handleValidate = () => {
-    // TODO: Implement validate logic
+    const jsonString = input.trim();
+    try {
+      JSON.parse(jsonString);
+      setSuccess("Valid JSON!");
+      setError("");
+      setFormatted("");
+    } catch (err) {
+      setError("Invalid JSON: " + err.message);
+      setSuccess("");
+      setFormatted("");
+    }
   };
 
   const handleMinify = () => {
-    // TODO: Implement minify logic
+    try {
+      const parsed = JSON.parse(input);
+      setFormatted(JSON.stringify(parsed));
+      setSuccess("JSON minified successfully!");
+      setError("");
+    } catch (err) {
+      setError("Invalid JSON: " + err.message);
+      setFormatted("");
+      setSuccess("");
+    }
   };
 
   const handleClear = () => {
-    // TODO: Implement clear logic
+    setInput("");
+    setFormatted("");
+    setError("");
+    setSuccess("");
   };
 
   return (
@@ -29,6 +60,7 @@ function App() {
       <div className="container">
         <textarea
           id="input"
+          data-testid="json-input"
           placeholder="Enter your JSON here"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -36,12 +68,39 @@ function App() {
           cols={70}
         ></textarea>
 
-        <div className="button-container">
-          <button onClick={handleFormat}>Format</button>
-          <button onClick={handleValidate}>Validate</button>
-          <button onClick={handleMinify}>Minify</button>
-          <button onClick={handleClear}>Clear</button>
+        <div data-testid="btn-group" className="button-container">
+          <button data-testid="format-btn" onClick={handleFormat}>
+            Format
+          </button>
+          <button data-testid="validate-btn" onClick={handleValidate}>
+            Validate
+          </button>
+          <button data-testid="minify-btn" onClick={handleMinify}>
+            Minify
+          </button>
+          <button data-testid="clear-btn" onClick={handleClear}>
+            Clear
+          </button>
         </div>
+
+        <div>
+          {error && (
+            <div data-testid="error-message" className="error">
+              {error}
+            </div>
+          )}
+          {success && (
+            <div data-testid="success-message" className="success">
+              {success}
+            </div>
+          )}
+        </div>
+
+        {formatted && (
+          <pre data-testid="formatted-output" className="output">
+            {formatted}
+          </pre>
+        )}
       </div>
     </div>
   );
