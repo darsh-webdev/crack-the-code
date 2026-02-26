@@ -1,48 +1,104 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 
-function App() {
-  useEffect(() => {
-    // Disabled the Button If Temperature or Fromunit or toUnit is Empty
-  }, []);
+type Unit = "Celsius" | "Fahrenheit" | "Kelvin";
 
-  const convertTemperature = () => {
-    // Conversion logic
+function App() {
+  const [temperature, setTemperature] = useState<number | "">("");
+  const [fromUnit, setFromUnit] = useState<Unit>("Celsius");
+  const [toUnit, setToUnit] = useState<Unit>("Fahrenheit");
+  const [convertedValue, setConvertedValue] = useState<number | null>(null);
+
+  const convertTemperature = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (temperature === "") return;
+
+    let celsius: number;
+
+    // Convert → Celsius
+    switch (fromUnit) {
+      case "Celsius":
+        celsius = temperature;
+        break;
+
+      case "Fahrenheit":
+        celsius = ((temperature - 32) * 5) / 9;
+        break;
+
+      case "Kelvin":
+        celsius = temperature - 273.15;
+        break;
+
+      default:
+        throw new Error("Invalid from unit");
+    }
+
+    let result: number;
+
+    // Convert Celsius → Target
+    switch (toUnit) {
+      case "Celsius":
+        result = celsius;
+        break;
+
+      case "Fahrenheit":
+        result = (celsius * 9) / 5 + 32;
+        break;
+
+      case "Kelvin":
+        result = celsius + 273.15;
+        break;
+
+      default:
+        throw new Error("Invalid to unit");
+    }
+
+    // Round to 2 decimal places safely
+    const rounded = Number(result.toFixed(2));
+
+    setConvertedValue(rounded);
   };
 
   return (
     <div className="temperature-convertor">
       <h1>Temperature Convertor</h1>
-      <p>
-        Enter a value and convert it between Celsius, Fahrenheit, and Kelvin.
-      </p>
 
       <form className="tempForm">
-        <div className="inputs">
-          {/* Add values and onChange Logic*/}
-          <input
-            data-testid="temperature-input"
-            type="number"
-            id="temperatureUnit"
-          />
+        <input
+          type="number"
+          value={temperature}
+          onChange={(e) =>
+            setTemperature(e.target.value === "" ? "" : Number(e.target.value))
+          }
+        />
 
-          <select id="fromUnit" data-testid="from-unit">
-            {/* Options */}
-          </select>
+        <select
+          value={fromUnit}
+          onChange={(e) => setFromUnit(e.target.value as Unit)}
+        >
+          <option value="Celsius">Celsius</option>
+          <option value="Fahrenheit">Fahrenheit</option>
+          <option value="Kelvin">Kelvin</option>
+        </select>
 
-          <select id="toUnit" data-testid="to-unit">
-            {/* Options */}
-          </select>
+        <select
+          value={toUnit}
+          onChange={(e) => setToUnit(e.target.value as Unit)}
+        >
+          <option value="Celsius">Celsius</option>
+          <option value="Fahrenheit">Fahrenheit</option>
+          <option value="Kelvin">Kelvin</option>
+        </select>
 
-          {/* Make it Disabled , Only Enabled if all values are true */}
-          <button data-testid="convert-button" id="convert-btn">
-            Convert
-          </button>
-        </div>
+        <button disabled={temperature === ""} onClick={convertTemperature}>
+          Convert
+        </button>
 
-        <div>
-          <p id="result"></p>
-        </div>
+        {convertedValue !== null && (
+          <p>
+            {temperature} {fromUnit} is {convertedValue.toFixed(2)} {toUnit}
+          </p>
+        )}
       </form>
     </div>
   );
