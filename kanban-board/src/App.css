@@ -10,6 +10,7 @@ input {
   border: 1px solid gray;
   border-radius: 6px;
   background-color: white;
+  color: #333;
 }
 
 .kanban-board {
@@ -84,4 +85,11 @@ input {
   border: none;
   border-radius: 2px;
   color: white;
+}
+
+.editBtn,
+.shiftBtn,
+.deleteBtn {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
