@@ -33,7 +33,7 @@ h1 {
 }
 
 .card.revealed {
-  background-color: #fff;
+  background-color: transparent;
 }
 
 .reset-button {
