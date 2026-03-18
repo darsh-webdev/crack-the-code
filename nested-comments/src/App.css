@@ -1,0 +1,59 @@
+.App {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: sans-serif;
+  background-color: var(--social-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+}
+
+.new-comment input {
+  padding: 6px;
+  width: 70%;
+  margin: 10px;
+  border: 1px solid var(--accent-border);
+  border-radius: 6px;
+}
+
+.new-comment button {
+  padding: 8px 12px;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.comment {
+  margin-left: 20px;
+  margin-top: 15px;
+  padding-left: 10px;
+  border-left: 1px solid #ccc;
+}
+
+.reply-box {
+  margin-top: 6px;
+}
+
+.reply-box input {
+  padding: 5px;
+  width: 60%;
+  margin-right: 8px;
+}
+
+.reply-box button {
+  padding: 5px 8px;
+}
+
+.reply-btn {
+  margin-top: 5px;
+  font-size: 12px;
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+}
+
+.replies {
+  margin-top: 10px;
+}
