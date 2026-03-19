@@ -20,7 +20,7 @@
   padding: 8px 12px;
   background-color: var(--accent);
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   font-weight: bold;
 }
 
@@ -29,6 +29,7 @@
   margin-top: 15px;
   padding-left: 10px;
   border-left: 1px solid #ccc;
+  text-align: left;
 }
 
 .reply-box {
@@ -43,6 +44,9 @@
 
 .reply-box button {
   padding: 5px 8px;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 4px;
 }
 
 .reply-btn {
@@ -50,7 +54,7 @@
   font-size: 12px;
   background: none;
   border: none;
-  color: blue;
+  color: var(--accent);
   cursor: pointer;
 }
 
