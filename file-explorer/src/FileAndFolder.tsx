@@ -11,7 +11,7 @@ type FileAndFolderProps = {
 };
 
 const FileAndFolder = ({ data, onAdd, onRemove }: FileAndFolderProps) => {
-  const [collapsed, setCollapsed] = useState({});
+  const [collapsed, setCollapsed] = useState<Record<number, boolean>>({});
   return (
     <div>
       {data.map((item) => (
@@ -46,7 +46,10 @@ const FileAndFolder = ({ data, onAdd, onRemove }: FileAndFolderProps) => {
                 )}
                 <span>{item.name}</span>
                 <FiFolderPlus size={15} onClick={() => onAdd(item.id, true)} />
-                <AiOutlineFileAdd size={15} onClick={onAdd(item.id, false)} />
+                <AiOutlineFileAdd
+                  size={15}
+                  onClick={() => onAdd(item.id, false)}
+                />
                 <MdDeleteOutline size={15} onClick={() => onRemove(item.id)} />
               </div>
               {!collapsed[item.id] && item.children && (

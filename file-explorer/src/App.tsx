@@ -9,6 +9,11 @@ export type Structure = {
   children?: Structure[];
 };
 
+type ModalInfo = {
+  parentId: number | null;
+  isFolder: boolean;
+};
+
 const initialData: Structure[] = [
   {
     id: 1,
@@ -30,9 +35,9 @@ const initialData: Structure[] = [
 
 function App() {
   const [data, setData] = useState(initialData);
-  const [idCounter, setIdCounter] = useState(7);
-  const [showModal, setShowModal] = useState(false);
-  const [modalInfo, setModalInfo] = useState({
+  const [idCounter, setIdCounter] = useState<number>(7);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalInfo, setModalInfo] = useState<ModalInfo>({
     parentId: null,
     isFolder: false,
   });
@@ -56,9 +61,9 @@ function App() {
       ...(isFolder ? { children: [] } : {}),
     };
 
-    const updateTree = (nodes) =>
+    const updateTree = (nodes: Structure[]): Structure[] =>
       nodes.map((node) => {
-        if (node.id === parentId && nodes.isFolder) {
+        if (node.id === parentId && node.isFolder) {
           return { ...node, children: [...(node.children || []), newItem] };
         } else if (node.children) {
           return { ...node, children: updateTree(node.children) };
@@ -73,7 +78,7 @@ function App() {
   };
 
   const handleRemove = (itemId: number) => {
-    const deleteNode = (nodes: Structure[]) =>
+    const deleteNode = (nodes: Structure[]): Structure[] =>
       nodes
         .filter((node) => node.id !== itemId)
         .map((node) =>
@@ -98,7 +103,15 @@ function App() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
             />
-            <div style={{ marginTop: "10px" }}>
+            <div
+              style={{
+                marginTop: "10px",
+                display: "flex",
+                gap: "10px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
               <button onClick={handleModalSubmit}>Add</button>
               <button onClick={() => setShowModal(false)}>Cancel</button>
             </div>
