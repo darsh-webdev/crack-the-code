@@ -163,6 +163,7 @@ function App() {
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
+        data-testid="sticky-notes-container"
       >
         <div
           style={{
@@ -179,6 +180,7 @@ function App() {
           {notes.map((note, index) => (
             <div
               className="note"
+              data-testid="sticky-note"
               key={note.id}
               style={{
                 backgroundColor: note.color,
@@ -193,6 +195,7 @@ function App() {
             >
               <button
                 className="close-btn"
+                data-testid="close-button"
                 onClick={(e) => {
                   e.stopPropagation();
                   removeNote(note.id);
@@ -200,10 +203,15 @@ function App() {
                 onMouseDown={(e) => e.stopPropagation()}
                 title="Close"
               >
-                <X className="icon-close" onClick={() => removeNote(note.id)} />
+                <X
+                  className="icon-close"
+                  data-testid="icon-close"
+                  onClick={() => removeNote(note.id)}
+                />
               </button>
               <textarea
                 className="note-textarea"
+                data-testid="note-textarea"
                 onChange={(e) => updateText(note.id, e.target.value)}
                 value={note.content}
                 placeholder="Enter text"
@@ -213,8 +221,8 @@ function App() {
           ))}
         </div>
 
-        <button className="add-note-btn">
-          <Plus className="icon-add" onClick={addNote} />
+        <button className="add-note-btn" data-testid="add-note-button">
+          <Plus className="icon-add" data-testid="icon-add" onClick={addNote} />
         </button>
       </div>
     </>
