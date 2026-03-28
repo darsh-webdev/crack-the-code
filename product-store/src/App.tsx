@@ -8,12 +8,17 @@ function App() {
   return (
     <>
       <nav className="navbar">
-        <Link to="/" className="navLink">
-          Home
-        </Link>{" "}
-        <Link to="/products" className="navLink">
-          Products
-        </Link>
+        <div>
+          <h3>Product Store</h3>
+        </div>
+        <div>
+          <Link to="/" className="navLink">
+            Home
+          </Link>{" "}
+          <Link to="/products" className="navLink">
+            Products
+          </Link>
+        </div>
       </nav>
       <Routes>
         <Route path="/" element={<Home />} />
