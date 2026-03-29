@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export type Product = {
@@ -12,7 +12,7 @@ export type Product = {
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -21,8 +21,8 @@ const Products = () => {
         if (!res.ok) throw new Error("Failed to fetch products");
         const data = await res.json();
         setProducts(data.products);
-      } catch (error) {
-        setError(error);
+      } catch (error: Error | unknown) {
+        setError(error instanceof Error ? error.message : null);
       } finally {
         setIsLoading(false);
       }

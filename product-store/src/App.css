@@ -99,7 +99,7 @@ h3 {
 }
 
 .view-more {
-  color: #3498db;
+  color: var(--accent);
   text-decoration: none;
   font-size: 1.1em;
 }
@@ -123,6 +123,10 @@ h3 {
 }
 
 .back-to-products {
-  color: #3498db;
+  color: var(--accent);
   text-decoration: none;
+}
+
+.back-to-products:hover {
+  text-decoration: underline;
 }
