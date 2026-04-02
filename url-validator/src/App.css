@@ -1,0 +1,10 @@
+.url-input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  color: var(--text-h);
+  margin-bottom: 10px;
+}
