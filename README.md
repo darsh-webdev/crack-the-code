@@ -37,14 +37,21 @@ Make sure you have the following installed:
 
 ### 📦 Installation
 
+> ⚠️ **Note:** The steps below apply only to **React projects** inside this repository.
+
+1. Navigate to the specific React project folder:
+```bash
+cd project-folder-name
+```
+
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-### ▶️ Run the Project
-
+3. Run the project:
 ```bash
-npm start
+npm run start
 ```
 
 ---
