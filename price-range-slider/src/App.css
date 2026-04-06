@@ -45,6 +45,7 @@
   background-color: #ddd;
   border-radius: 3px;
   margin: 40px 0;
+  z-index: 1;
 }
 
 .slider-active-range {
@@ -59,10 +60,24 @@
   pointer-events: none;
   position: absolute;
   width: 100%;
-  height: 6px;
+  height: 0;
   background: none;
   appearance: none;
-  top: 0;
+  z-index: 3;
+}
+
+.thumb::-webkit-slider-runnable-track {
+  height: 0;
+}
+
+.thumb::-moz-range-track {
+  height: 18px;
+  width: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  margin-top: -6px;
 }
 
 /* Enables pointer interaction only on the thumb handle */
@@ -76,17 +91,20 @@
   cursor: pointer;
   border: 2px solid white;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  z-index: 3;
   position: relative;
+  z-index: 6;
+  margin-top: -6px; /* centers thumb on track */
 }
 
 /* Ensure min slider is always on top to be draggable */
 .thumb--left {
-  z-index: 4;
+  z-index: 5;
+  transform: translateY(-2px);
 }
 
 .thumb--right {
-  z-index: 3;
+  z-index: 4;
+  transform: translateY(2px);
 }
 
 .slider-label {
