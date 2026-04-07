@@ -59,10 +59,13 @@
 .thumb {
   pointer-events: none;
   position: absolute;
+  top: 0; /* Aligns input perfectly to the top of the track */
+  left: 0; /* Prevents the second input from wrapping */
   width: 100%;
   height: 0;
   background: none;
   appearance: none;
+  -webkit-appearance: none;
   z-index: 3;
 }
 
@@ -70,20 +73,10 @@
   height: 0;
 }
 
-.thumb::-moz-range-track {
-  height: 18px;
-  width: 18px;
-  background: var(--accent);
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid white;
-  margin-top: -6px;
-}
-
-/* Enables pointer interaction only on the thumb handle */
 .thumb::-webkit-slider-thumb {
   pointer-events: all;
   appearance: none;
+  -webkit-appearance: none;
   height: 18px;
   width: 18px;
   background: var(--accent);
@@ -93,18 +86,27 @@
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   position: relative;
   z-index: 6;
-  margin-top: -6px; /* centers thumb on track */
+  margin-top: -6px; /* Centers the 18px thumb on the 6px track */
 }
 
-/* Ensure min slider is always on top to be draggable */
+.thumb::-moz-range-thumb {
+  pointer-events: all;
+  appearance: none;
+  height: 18px;
+  width: 18px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
 .thumb--left {
   z-index: 5;
-  transform: translateY(-2px);
 }
 
 .thumb--right {
   z-index: 4;
-  transform: translateY(2px);
 }
 
 .slider-label {

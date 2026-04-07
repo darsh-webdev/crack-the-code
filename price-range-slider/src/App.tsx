@@ -84,7 +84,7 @@ function App() {
             data-testid="slider-min"
             type="range"
             min={MIN}
-            max={maxVal - STEP}
+            max={MAX}
             step={STEP}
             value={minVal}
             onChange={handleMinChange}
@@ -93,7 +93,7 @@ function App() {
           <input
             data-testid="slider-max"
             type="range"
-            min={minVal + STEP}
+            min={MIN}
             max={MAX}
             step={STEP}
             value={maxVal}
