@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-//TODO 1: Write a function that returns a random string of letters and numbers
-//TODO 2: When the component loads, generate a new captcha and store input
-//TODO 3: Compare user input with the captcha when form is submitted
-//TODO 4: When "Regenerate" button is clicked, create a new captcha
-
-const generateCaptcha = (length = 5) => {};
+const generateCaptcha = (length = 5) => {
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  return Array.from({ length }, () =>
+    chars.charAt(Math.floor(Math.random() * chars.length)),
+  ).join("");
+};
 
 //Helper function to style each character with a random rotation and skew
 const getCharStyle = () => {
@@ -30,15 +30,22 @@ function App() {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    // generate and set captcha here
+    setCaptcha(generateCaptcha());
   }, []);
 
   const handleSubmit = (e) => {
-    // write validation logic here
+    e.preventDefault();
+    if (input.trim().toUpperCase() === captcha) {
+      setMessage("Correct");
+    } else {
+      setMessage("Incorrect");
+    }
   };
 
   const resetCaptcha = () => {
-    // regenerate the captcha here
+    setCaptcha(generateCaptcha());
+    setInput("");
+    setMessage("");
   };
 
   return (
@@ -66,7 +73,11 @@ function App() {
         </button>
       </form>
 
-      {message && <p>{message}</p>}
+      {message && (
+        <p style={{ color: `${message === "Correct" ? "green" : "red"}` }}>
+          {message}
+        </p>
+      )}
     </div>
   );
 }
