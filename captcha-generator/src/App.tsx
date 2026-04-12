@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 const generateCaptcha = (length = 5) => {
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   return Array.from({ length }, () =>
     chars.charAt(Math.floor(Math.random() * chars.length)),
   ).join("");
@@ -33,9 +34,9 @@ function App() {
     setCaptcha(generateCaptcha());
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input.trim().toUpperCase() === captcha) {
+    if (input.trim() === captcha) {
       setMessage("Correct");
     } else {
       setMessage("Incorrect");
