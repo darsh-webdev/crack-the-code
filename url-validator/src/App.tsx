@@ -28,28 +28,27 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>URL Validator</h1>
+    <div className="app">
+      <div className="card">
+        <h1 className="title">🔗 URL Validator</h1>
 
-      <div className="container">
         <input
           type="text"
           data-testid="url-input"
           className="url-input"
           value={input}
           onChange={handleInputChange}
-          placeholder="Enter URL here"
+          placeholder="https://example.com"
         />
-        <p>
-          {isValid !== null && (
-            <p
-              data-testid="result"
-              style={{ color: isValid ? "green" : "red" }}
-            >
-              {isValid ? "Valid URL" : "Invalid URL"}
-            </p>
-          )}
-        </p>
+
+        {isValid !== null && (
+          <p
+            data-testid="result"
+            className={`result ${isValid ? "valid" : "invalid"}`}
+          >
+            {isValid ? "✅ Valid URL" : "❌ Invalid URL"}
+          </p>
+        )}
       </div>
     </div>
   );

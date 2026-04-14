@@ -1,3 +1,41 @@
+/* Center layout */
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  padding: 2rem;
+  margin-top: 100px;
+  min-height: 100vh;
+}
+
+/* Card UI */
+.card {
+  background: var(--bg);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+.title {
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Input upgrade */
 .url-input {
   width: 300px;
   padding: 10px;
@@ -7,4 +45,23 @@
   border-radius: 8px;
   color: var(--text-h);
   margin-bottom: 10px;
+}
+
+.url-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(170, 59, 255, 0.2);
+}
+
+/* Result styling */
+.result {
+  margin-top: 1rem;
+  font-weight: 500;
+}
+
+.result.valid {
+  color: #16a34a;
+}
+
+.result.invalid {
+  color: #dc2626;
 }
