@@ -1,0 +1,35 @@
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  padding: 15px;
+  background-color: var(--accent-bg);
+  border-radius: 8px;
+  border: 1px solid var(--accent-border);
+  color: var(--text-h);
+}
+
+.loading {
+  margin-top: 15px;
+  color: var(--accent);
+}
+
+.end {
+  margin-top: 15px;
+  color: var(--accent);
+}
