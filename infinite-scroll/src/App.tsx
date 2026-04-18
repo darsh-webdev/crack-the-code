@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useInfiniteScroll } from "./useInfiniteScroll";
 import "./App.css";
 
 type Item = {
@@ -6,67 +6,43 @@ type Item = {
   text: string;
 };
 
-// simulate API
-const fetchItems = (page: number, limit: number): Promise<Item[]> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const items = Array.from({ length: limit }, (_, i) => ({
-        id: page * limit + i,
-        text: `Item ${page * limit + i + 1}`,
-      }));
-      resolve(items);
+// Simulated API
+const fetchItems = async (
+  page: number,
+  signal: AbortSignal,
+): Promise<Item[]> => {
+  return new Promise((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      resolve(
+        Array.from({ length: 10 }, (_, i) => ({
+          id: page * 10 + i,
+          text: `Item ${page * 10 + i + 1}`,
+        })),
+      );
     }, 800);
+
+    signal.addEventListener("abort", () => {
+      clearTimeout(timeout);
+      reject(new DOMException("Aborted", "AbortError"));
+    });
   });
 };
 
 function App() {
-  const [items, setItems] = useState<Item[]>([]);
-  const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [hasMore, setHasMore] = useState(true);
-
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const newItems = await fetchItems(page, 10);
-
-      if (newItems.length === 0) {
-        setHasMore(false);
-      } else {
-        setItems((prev) => [...prev, ...newItems]);
-      }
-
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [page]);
-
-  const lastItemRef = (node: HTMLDivElement | null) => {
-    if (loading) return;
-
-    if (observerRef.current) observerRef.current.disconnect();
-
-    observerRef.current = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage((prev) => prev + 1);
-      }
+  const { data, loading, error, hasMore, lastElementRef, retry } =
+    useInfiniteScroll<Item>({
+      fetchFn: fetchItems,
     });
-
-    if (node) observerRef.current.observe(node);
-  };
 
   return (
     <div className="container">
       <h1>Infinite Scroll</h1>
 
       <div className="list">
-        {items.map((item, index) => {
-          if (index === items.length - 1) {
+        {data.map((item, index) => {
+          if (index === data.length - 1) {
             return (
-              <div ref={lastItemRef} key={item.id} className="item">
+              <div ref={lastElementRef} key={item.id} className="item">
                 {item.text}
               </div>
             );
@@ -81,6 +57,14 @@ function App() {
       </div>
 
       {loading && <p className="loading">Loading...</p>}
+
+      {error && (
+        <div className="error">
+          <p>{error}</p>
+          <button onClick={retry}>Retry</button>
+        </div>
+      )}
+
       {!hasMore && <p className="end">No more items</p>}
     </div>
   );
