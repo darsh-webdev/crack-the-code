@@ -1,0 +1,43 @@
+.container {
+  max-width: 400px;
+  margin: 60px auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+}
+
+.loading {
+  margin-top: 10px;
+  color: var(--accent);
+}
+
+.error {
+  margin-top: 10px;
+  color: var(--error);
+}
+
+.results {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  color: var(--text-h);
+}
+
+.results li {
+  padding: 8px;
+  border-bottom: 1px solid var(--accent-border);
+}
