@@ -1,0 +1,38 @@
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h1 {
+  color: var(--accent);
+}
+
+.list-container {
+  overflow-y: auto;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  position: relative;
+}
+
+.spacer {
+  position: relative;
+  width: 100%;
+}
+
+.items {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.item {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  border-bottom: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--text-h);
+}
