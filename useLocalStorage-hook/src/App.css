@@ -1,0 +1,29 @@
+.container {
+  max-width: 400px;
+  margin: 60px auto;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: var(--accent-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px var(--accent-shadow);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-border);
+}
+
+.hint {
+  margin-top: 15px;
+  font-size: 13px;
+  color: var(--text-h);
+}
