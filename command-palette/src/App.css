@@ -1,0 +1,69 @@
+.container {
+  text-align: center;
+  margin-top: 100px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: var(--accent);
+}
+
+/* Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 200px;
+}
+
+/* Palette box */
+.palette {
+  width: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Input */
+.input {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border-bottom: 1px solid var(--accent);
+}
+
+/* List */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* Items */
+.item {
+  padding: 10px 12px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background: rgba(170, 59, 255, 0.5);
+  color: var(--text-h);
+}
+
+.active {
+  background: var(--accent-border);
+  color: var(--text-h);
+}
+
+.empty {
+  padding: 10px;
+  color: #888;
+}
