@@ -22,12 +22,31 @@ function App() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const isMac = useMemo(() => {
+    return navigator.platform.toLowerCase().includes("mac");
+  }, []);
+
+  const shortcutLabel = isMac ? "⌘ + K" : "Ctrl + K";
+
+  const togglePalette = () => {
+    setOpen((prev) => {
+      const next = !prev;
+
+      if (next) {
+        setQuery("");
+        setActiveIndex(0);
+      }
+
+      return next;
+    });
+  };
+
   // Open with Ctrl + K / Cmd + K
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
-        setOpen((prev) => !prev);
+        togglePalette();
       }
     };
 
@@ -37,11 +56,13 @@ function App() {
 
   // Focus input when opened
   useEffect(() => {
-    if (open) {
-      setQuery("");
-      setActiveIndex(0);
-      setTimeout(() => inputRef.current?.focus(), 0);
-    }
+    if (!open) return;
+
+    const id = setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
+
+    return () => clearTimeout(id);
   }, [open]);
 
   const filteredCommands = useMemo(() => {
@@ -81,7 +102,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Command Palette (Ctrl + K)</h1>
+      <h1>Command Palette ({shortcutLabel})</h1>
 
       {open && (
         <div className="overlay" onClick={() => setOpen(false)}>
