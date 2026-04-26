@@ -1,0 +1,49 @@
+.container {
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 100px;
+  font-family: Arial, sans-serif;
+  background: var(--accent-bg);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: 400px;
+}
+
+h1 {
+  color: var(--accent);
+}
+
+.like-btn {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: var(--accent-border);
+  transition: 0.2s;
+}
+
+.like-btn:hover:not(:disabled) {
+  background: var(--accent-bg);
+}
+
+.like-btn.liked {
+  background: #ff4d6d;
+  color: var(--text-h);
+}
+
+.like-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.loading {
+  margin-top: 10px;
+  color: #007bff;
+}
+
+.error {
+  margin-top: 10px;
+  color: red;
+}
