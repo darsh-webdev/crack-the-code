@@ -7,14 +7,14 @@ type QueryState<T> = {
 };
 
 class QueryClient {
-  private cache = new Map<string, QueryState<any>>();
+  private cache = new Map<string, QueryState<unknown>>();
 
   get<T>(key: string): QueryState<T> | undefined {
-    return this.cache.get(key);
+    return this.cache.get(key) as QueryState<T> | undefined;
   }
 
   set<T>(key: string, state: QueryState<T>) {
-    this.cache.set(key, state);
+    this.cache.set(key, state as QueryState<unknown>);
   }
 
   clear(key: string) {

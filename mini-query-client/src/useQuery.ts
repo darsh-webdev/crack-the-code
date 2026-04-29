@@ -31,8 +31,7 @@ export function useQuery<T>(
 
     // Use cache if fresh
     if (cached && now - cached.updatedAt < staleTime) {
-      setState(cached);
-      return;
+      return; // already using cached state from initializer
     }
 
     // De-duplicate requests
@@ -75,10 +74,12 @@ export function useQuery<T>(
 
         if (isMounted) setState(updated);
       })
-      .catch((err: any) => {
+      .catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : "Unknown error";
+
         const updated = {
           data: undefined,
-          error: err.message,
+          error: message,
           isLoading: false,
           updatedAt: Date.now(),
         };
