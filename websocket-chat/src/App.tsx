@@ -20,22 +20,26 @@ function App() {
     setMessages((prev) => [...prev, msg]);
   }, []);
 
+  const handleStatus = useCallback((status: boolean) => {
+    setConnected(status);
+  }, []);
+
   // Connect / disconnect lifecycle
   useEffect(() => {
     const socket = new MockSocket();
     socketRef.current = socket;
 
-    socket.connect();
-    setConnected(true);
+    const unsubMsg = socket.subscribe(handleIncoming);
+    const unsubStatus = socket.onStatusChange(handleStatus);
 
-    const unsubscribe = socket.subscribe(handleIncoming);
+    socket.connect();
 
     return () => {
-      unsubscribe();
+      unsubMsg();
+      unsubStatus();
       socket.disconnect();
-      setConnected(false);
     };
-  }, [handleIncoming]);
+  }, [handleIncoming, handleStatus]);
 
   // Send message
   const sendMessage = () => {
