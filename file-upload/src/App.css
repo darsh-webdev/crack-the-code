@@ -1,0 +1,74 @@
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background: var(--accent-bg);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.file-name {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.controls {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+h1 {
+  color: var(--accent);
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+  border: none;
+  background: var(--accent);
+  color: white;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: var(--accent-border);
+}
+
+.progress-wrapper {
+  margin-top: 20px;
+  width: 100%;
+  background: #eee;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  height: 20px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #007bff;
+  transition: width 0.2s;
+}
+
+.progress-wrapper span {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  top: 2px;
+}
+
+.success {
+  margin-top: 15px;
+  color: green;
+}
+
+.error {
+  margin-top: 15px;
+  color: red;
+}
