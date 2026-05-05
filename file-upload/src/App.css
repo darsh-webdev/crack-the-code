@@ -35,7 +35,13 @@ button {
   transition: background 0.2s;
 }
 
-button:hover {
+button:not(:disabled):hover {
+  background: var(--accent-border);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
   background: var(--accent-border);
 }
 
@@ -60,7 +66,10 @@ button:hover {
   width: 100%;
   text-align: center;
   font-size: 12px;
-  top: 2px;
+  left: 2px;
+  top: 1px;
+  color: black;
+  font-weight: bold;
 }
 
 .success {
