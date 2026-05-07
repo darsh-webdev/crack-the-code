@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { searchAPI, type Suggestion } from "./mockSearch";
 import "./App.css";
 
@@ -54,7 +54,6 @@ function App() {
   // Fetch suggestions
   useEffect(() => {
     if (!debouncedQuery) {
-      setResults([]);
       return;
     }
 
@@ -98,7 +97,7 @@ function App() {
     };
   }, [debouncedQuery]);
 
-  const hasResults = useMemo(() => results.length > 0, [results]);
+  const displayedResults = debouncedQuery ? results : [];
 
   return (
     <div className="container">
@@ -113,9 +112,9 @@ function App() {
 
       {loading && <p className="loading">Loading...</p>}
 
-      {hasResults && (
+      {displayedResults.length > 0 && (
         <ul className="list">
-          {results.map((item) => (
+          {displayedResults.map((item) => (
             <li key={item.id} className="item">
               {highlightMatch(item.label, debouncedQuery)}
             </li>
