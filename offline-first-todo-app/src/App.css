@@ -1,0 +1,48 @@
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.online {
+  color: green;
+}
+
+.offline {
+  color: red;
+}
+
+.input-row {
+  margin-top: 15px;
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  flex: 1;
+  padding: 8px;
+}
+
+button {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.sync-status {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.list {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.list li {
+  margin-bottom: 8px;
+}
