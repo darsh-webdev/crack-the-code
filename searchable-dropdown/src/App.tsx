@@ -6,10 +6,14 @@ const DROPDOWN_OPTIONS = [
   "Banana",
   "Cherry",
   "Date",
-  "Elderberry",
-  "Fig",
   "Grape",
-  "Honeydew",
+  "Lemon",
+  "Mango",
+  "Orange",
+  "Papaya",
+  "Pineapple",
+  "Strawberry",
+  "Watermelon",
 ];
 
 function App() {
