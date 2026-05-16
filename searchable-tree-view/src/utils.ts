@@ -6,24 +6,24 @@ export function filterTree(nodes: TreeNode[], query: string): TreeNode[] {
 
   const lower = query.toLowerCase();
 
-  return nodes
-    .map((node) => {
-      const matches = node.label.toLowerCase().includes(lower);
+  const filteredNodes: Array<TreeNode | null> = nodes.map((node) => {
+    const matches = node.label.toLowerCase().includes(lower);
 
-      const filteredChildren = node.children
-        ? filterTree(node.children, query)
-        : [];
+    const filteredChildren = node.children
+      ? filterTree(node.children, query)
+      : undefined;
 
-      if (matches || filteredChildren.length > 0) {
-        return {
-          ...node,
-          children: filteredChildren,
-        };
-      }
+    if (matches || (filteredChildren?.length ?? 0) > 0) {
+      return {
+        ...node,
+        ...(filteredChildren ? { children: filteredChildren } : {}),
+      };
+    }
 
-      return null;
-    })
-    .filter((node): node is TreeNode => node !== null);
+    return null;
+  });
+
+  return filteredNodes.filter((node): node is TreeNode => node !== null);
 }
 
 // Collect all ids for auto-expand
