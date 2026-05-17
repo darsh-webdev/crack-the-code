@@ -18,7 +18,7 @@ h1 {
 }
 
 .tag {
-  background: var(--accent-bg);
+  background: var(--accent-border);
   color: var(--text-h);
   padding: 6px 10px;
   border-radius: 20px;
