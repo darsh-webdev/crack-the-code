@@ -18,11 +18,11 @@ const DROPDOWN_OPTIONS = [
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState("");
   const [highlightedIndex, setHighlightedIndex] = useState(0);
-  const dropdownRef = useRef(null);
-  const highlightedOptionRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const highlightedOptionRef = useRef<HTMLLIElement | null>(null);
 
   const filteredOptions = DROPDOWN_OPTIONS.filter(
     (opt) =>
@@ -65,7 +65,11 @@ function App() {
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
-      if (!dropdownRef.current.contains(e.target as Node)) setIsOpen(false);
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      )
+        setIsOpen(false);
     };
     document.addEventListener("click", handleOutsideClick);
     return () => document.removeEventListener("click", handleOutsideClick);
