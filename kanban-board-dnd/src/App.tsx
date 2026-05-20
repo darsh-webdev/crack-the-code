@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 
 type Task = {
@@ -11,6 +11,11 @@ type Column = {
   title: string;
   tasks: Task[];
 };
+
+type DraggedTask = {
+  taskId: number;
+  sourceColumnId: string;
+} | null;
 
 const initialColumns: Column[] = [
   {
@@ -36,46 +41,96 @@ const initialColumns: Column[] = [
 function App() {
   const [columns, setColumns] = useState<Column[]>(initialColumns);
 
-  // TODO:
-  // Track currently dragged task
-  // Suggested:
-  // {
-  //   taskId
-  //   sourceColumnId
-  // }
+  const [draggedTask, setDraggedTask] = useState<DraggedTask>(null);
 
-  // TODO:
   // Handle drag start
-  // Save dragged task metadata
+  const handleDragStart = (taskId: number, sourceColumnId: string) => {
+    setDraggedTask({
+      taskId,
+      sourceColumnId,
+    });
+  };
 
-  // TODO:
-  // Handle drag over
-  // Prevent default to allow dropping
+  // Allow drop
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
 
-  // TODO:
   // Handle drop
-  // Remove task from source column
-  // Add task to target column
-  // IMPORTANT:
-  // - immutable updates only
-  // - preserve task order
+  const handleDrop = (targetColumnId: string) => {
+    if (!draggedTask) return;
 
-  // TODO:
-  // Optional:
-  // Add reordering within same column
+    const { taskId, sourceColumnId } = draggedTask;
+
+    // prevent unnecessary updates
+    if (sourceColumnId === targetColumnId) {
+      setDraggedTask(null);
+      return;
+    }
+
+    let movedTask: Task | undefined;
+
+    const updatedColumns = columns.map((column) => {
+      // remove task from source
+      if (column.id === sourceColumnId) {
+        const remainingTasks = column.tasks.filter((task) => {
+          if (task.id === taskId) {
+            movedTask = task;
+            return false;
+          }
+
+          return true;
+        });
+
+        return {
+          ...column,
+          tasks: remainingTasks,
+        };
+      }
+
+      return column;
+    });
+
+    // task safety check
+    if (!movedTask) {
+      setDraggedTask(null);
+      return;
+    }
+
+    const finalColumns = updatedColumns.map((column) => {
+      // add task to target
+      if (column.id === targetColumnId) {
+        return {
+          ...column,
+          tasks: [...column.tasks, movedTask as Task],
+        };
+      }
+
+      return column;
+    });
+
+    setColumns(finalColumns);
+    setDraggedTask(null);
+  };
+
+  // Optional memoized total count
+  const totalTasks = useMemo(() => {
+    return columns.reduce((acc, column) => acc + column.tasks.length, 0);
+  }, [columns]);
 
   return (
     <div className="app">
-      <h1>Kanban Board with Drag & Drop</h1>
+      <h1>Kanban Board</h1>
+
+      <p className="task-count">Total Tasks: {totalTasks}</p>
 
       <div className="board">
         {columns.map((column) => (
           <div
             key={column.id}
             className="column"
-            // TODO:
-            // Handle drag over
-            // Handle drop
+            onDragOver={handleDragOver}
+            onDrop={() => handleDrop(column.id)}
           >
             <h2>{column.title}</h2>
 
@@ -85,8 +140,7 @@ function App() {
                   key={task.id}
                   className="task"
                   draggable
-                  // TODO:
-                  // Handle drag start
+                  onDragStart={() => handleDragStart(task.id, column.id)}
                 >
                   {task.title}
                 </div>
