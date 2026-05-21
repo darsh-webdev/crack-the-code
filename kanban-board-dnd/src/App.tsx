@@ -40,8 +40,27 @@ const initialColumns: Column[] = [
 
 function App() {
   const [columns, setColumns] = useState<Column[]>(initialColumns);
-
+  const [newTask, setNewTask] = useState("");
   const [draggedTask, setDraggedTask] = useState<DraggedTask>(null);
+
+  // Handle adding new task
+  const handleAddTask = () => {
+    if (!newTask.trim()) return;
+
+    const newTaskObj: Task = {
+      id: Date.now(),
+      title: newTask.trim(),
+    };
+
+    setColumns((prev) =>
+      prev.map((column) =>
+        column.id === "todo"
+          ? { ...column, tasks: [...column.tasks, newTaskObj] }
+          : column,
+      ),
+    );
+    setNewTask("");
+  };
 
   // Handle drag start
   const handleDragStart = (taskId: number, sourceColumnId: string) => {
@@ -123,6 +142,15 @@ function App() {
       <h1>Kanban Board</h1>
 
       <p className="task-count">Total Tasks: {totalTasks}</p>
+      <div className="add-task-container">
+        <input
+          type="text"
+          placeholder="Add a new task..."
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+        />
+        <button onClick={handleAddTask}>Add Task</button>
+      </div>
 
       <div className="board">
         {columns.map((column) => (

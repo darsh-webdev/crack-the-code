@@ -20,6 +20,35 @@ h1 {
   color: #666;
 }
 
+.add-task-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.add-task-container input {
+  padding: 8px;
+  background-color: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  color: var(--text-h);
+  flex: 1;
+}
+
+.add-task-container button {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.add-task-container button:hover {
+  background: var(--accent-border);
+}
+
 .board {
   display: flex;
   gap: 16px;
