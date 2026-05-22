@@ -62,6 +62,22 @@ function App() {
     setNewTask("");
   };
 
+  // Handle deleting a task
+  const handleDeleteTask = (taskId: number, columnId: string) => {
+    setColumns((prev) =>
+      prev.map((column) => {
+        if (column.id !== columnId) {
+          return column;
+        }
+
+        return {
+          ...column,
+          tasks: column.tasks.filter((task) => task.id !== taskId),
+        };
+      }),
+    );
+  };
+
   // Handle drag start
   const handleDragStart = (taskId: number, sourceColumnId: string) => {
     setDraggedTask({
@@ -170,7 +186,13 @@ function App() {
                   draggable
                   onDragStart={() => handleDragStart(task.id, column.id)}
                 >
-                  {task.title}
+                  <span>{task.title}</span>
+                  <button
+                    className="delete-btn"
+                    onClick={() => handleDeleteTask(task.id, column.id)}
+                  >
+                    ×
+                  </button>
                 </div>
               ))}
             </div>

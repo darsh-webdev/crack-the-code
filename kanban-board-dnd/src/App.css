@@ -84,6 +84,26 @@ h1 {
   cursor: grab;
   user-select: none;
   transition: transform 0.15s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.delete-btn {
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.delete-btn:hover {
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .task:hover {
