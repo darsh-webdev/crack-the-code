@@ -16,17 +16,18 @@
 }
 
 .add-product-section {
-  background-color: #fff3cd;
+  background-color: var(--bg);
   padding: 20px;
   border-radius: 8px;
   margin-top: 20px;
   margin-bottom: 20px;
-  border: 1px solid #ffeaa7;
+  border: 1px solid var(--accent);
+  text-align: left;
 }
 
 .add-product-title {
   margin: 0 0 15px 0;
-  color: #856404;
+  color: var(--accent);
 }
 
 .add-product-grid {
@@ -41,12 +42,14 @@
   margin-bottom: 5px;
   font-weight: bold;
   font-size: 14px;
+  color: var(--text-h);
 }
 
 .input-field {
   width: 80%;
   padding: 8px 12px;
-  border: 1px solid #ddd;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
   border-radius: 4px;
   font-size: 14px;
 }
@@ -161,9 +164,18 @@ button {
   color: var(--text-h);
 }
 
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+}
+
 .coupon-input-row {
   display: flex;
   gap: 10px;
+}
+
+.coupon-section {
+  border-bottom: 1px solid var(--border);
 }
 
 .coupon-input {
@@ -194,15 +206,14 @@ button {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 18px;
+  padding-top: 8px;
 }
 
 .discount-row {
   color: #28a745;
-}
-
-.final-total {
-  font-size: 18px;
-  font-weight: bold;
-  border-top: 1px solid #dee2e6;
-  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
 }
