@@ -1,4 +1,5 @@
 .calendar-app {
+  min-width: 500px;
   max-width: 800px;
   margin: 20px auto;
   font-family: Arial, sans-serif;
@@ -71,6 +72,7 @@ h1 {
   text-align: center;
   font-weight: bold;
   border-right: 1px solid var(--accent-border);
+  border-bottom: 1px solid var(--accent-border);
   color: var(--text-h);
 }
 
@@ -96,7 +98,7 @@ h1 {
 }
 
 .calendar-day.today {
-  background: var(--accent-bg);
+  background: var(--accent-border);
 }
 
 .calendar-day.empty {

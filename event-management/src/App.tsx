@@ -28,14 +28,16 @@ function App() {
   const currentYear = currentDate.getFullYear();
   const today = new Date();
 
-  // TODO: Calculate daysInMonth & firstDayOfMonth
+  // Calculate daysInMonth & firstDayOfMonth
+  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+  const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
   const goToPreviousMonth = () => {
-    // TODO
+    setCurrentDate(new Date(currentYear, currentMonth - 1, 1));
   };
 
   const goToNextMonth = () => {
-    // TODO
+    setCurrentDate(new Date(currentYear, currentMonth + 1, 1));
   };
 
   const openAddEventModal = () => {
@@ -54,17 +56,58 @@ function App() {
     // TODO
   };
 
-  const isToday = (day) => {
-    // TODO
+  // Check if a given day is today
+  const isToday = (day: number) => {
+    return (
+      day === today.getDate() &&
+      currentMonth === today.getMonth() &&
+      currentYear === today.getFullYear()
+    );
   };
 
-  const getEventsForDay = (day) => {
-    // TODO
+  // Get events for a specific day
+  const getEventsForDay = (day: number) => {
+    const targetDate = `${currentYear}-${String(currentMonth + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+    return events[targetDate] || [];
   };
 
   const renderCalendarDays = () => {
     const days = [];
-    // TODO
+
+    // Empty cells for days before month starts
+    for (let i = 0; i < firstDayOfMonth; i++) {
+      days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
+    }
+    // Days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const dayEvents = getEventsForDay(day);
+      const todaysClass = isToday(day) ? "today" : "";
+
+      days.push(
+        <div className={`calendar-day ${todaysClass}`} key={day}>
+          <span className="day-number">{day}</span>
+          <div className="events-container">
+            {dayEvents.map((event) => (
+              <div
+                key={event.id}
+                className="event-item"
+                data-testid="event-item"
+              >
+                <span>{event.title}</span>
+                <button
+                  className="delete-btn"
+                  data-testid="delete-event-btn"
+                  onClick={() => deleteEvent(event.id, event.date)}
+                >
+                  x
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>,
+      );
+    }
+
     return days;
   };
 
