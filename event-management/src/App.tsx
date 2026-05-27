@@ -41,11 +41,17 @@ function App() {
   };
 
   const openAddEventModal = () => {
-    // TODO
+    setEventTitle("");
+    setEventDate("");
+    setValidationError("");
+    setShowModal(true);
   };
 
   const closeModal = () => {
-    // TODO
+    setShowModal(false);
+    setEventDate("");
+    setEventTitle("");
+    setValidationError("");
   };
 
   const saveEvent = () => {
@@ -156,28 +162,58 @@ function App() {
         </div>
 
         {showModal && (
-          <div data-testid="event-modal">
-            {validationError && (
-              <div data-testid="validation-error">{validationError}</div>
-            )}
-            <input
-              data-testid="event-title-input"
-              value={eventTitle}
-              onChange={(e) => setEventTitle(e.target.value)}
-              placeholder="Event title"
-            />
-            <input
-              type="date"
-              data-testid="event-date-input"
-              value={eventDate}
-              onChange={(e) => setEventDate(e.target.value)}
-            />
-            <button data-testid="save-event-btn" onClick={saveEvent}>
-              Save Event
-            </button>
-            <button data-testid="close-modal-btn" onClick={closeModal}>
-              Cancel
-            </button>
+          <div className="modal-overlay" data-testid="event-modal">
+            <div className="modal">
+              <div className="modal-header">
+                <h3>Add Event</h3>
+                <button
+                  className="close-btn"
+                  data-testid="close-modal-btn"
+                  onClick={closeModal}
+                >
+                  x
+                </button>
+              </div>
+              <div className="modal-body">
+                {validationError && (
+                  <div data-testid="validation-error">{validationError}</div>
+                )}
+                <div className="form-group">
+                  <label>Event Title:</label>
+                  <input
+                    data-testid="event-title-input"
+                    value={eventTitle}
+                    onChange={(e) => setEventTitle(e.target.value)}
+                    placeholder="Event title"
+                  />
+                </div>
+                <div className="form-group">
+                  <label>Event Date:</label>
+                  <input
+                    type="date"
+                    data-testid="event-date-input"
+                    value={eventDate}
+                    onChange={(e) => setEventDate(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  className="save-btn"
+                  data-testid="save-event-btn"
+                  onClick={saveEvent}
+                >
+                  Save Event
+                </button>
+                <button
+                  className="cancel-btn"
+                  data-testid="close-modal-btn"
+                  onClick={closeModal}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>
