@@ -1,9 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 
+type Event = {
+  id: number;
+  title: string;
+  date: string;
+};
+
 function App() {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [events, setEvents] = useState({});
+  const [events, setEvents] = useState<Record<string, Event[]>>({});
   const [showModal, setShowModal] = useState(false);
   const [eventTitle, setEventTitle] = useState("");
   const [eventDate, setEventDate] = useState("");
@@ -55,11 +61,38 @@ function App() {
   };
 
   const saveEvent = () => {
-    // TODO
+    setValidationError("");
+
+    if (!eventTitle.trim()) {
+      setValidationError("Please enter event title");
+      return;
+    }
+
+    if (!eventDate) {
+      setValidationError("Please select event date");
+      return;
+    }
+
+    const newEvent = {
+      id: Date.now(),
+      title: eventTitle.trim(),
+      date: eventDate,
+    };
+
+    // Store events using the date as key in the format YYYY-MM-DD
+    setEvents((prevEvents) => ({
+      ...prevEvents,
+      [eventDate]: [...(prevEvents[eventDate] || []), newEvent],
+    }));
+
+    closeModal();
   };
 
-  const deleteEvent = (eventId, date) => {
-    // TODO
+  const deleteEvent = (eventId: number, date: string) => {
+    setEvents((prevEvents) => ({
+      ...prevEvents,
+      [date]: prevEvents[date].filter((event) => event.id !== eventId),
+    }));
   };
 
   // Check if a given day is today
@@ -205,11 +238,7 @@ function App() {
                 >
                   Save Event
                 </button>
-                <button
-                  className="cancel-btn"
-                  data-testid="close-modal-btn"
-                  onClick={closeModal}
-                >
+                <button className="cancel-btn" onClick={closeModal}>
                   Cancel
                 </button>
               </div>
