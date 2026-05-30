@@ -36,44 +36,87 @@ let resultEl;
 let historyEl;
 
 export function judgePoint24(cards) {
-  // TODO: Implement using DFS / Backtracking
+  const EPSILON = 1e-6;
+
+  function dfs(nums) {
+    if (nums.length === 1) {
+      return Math.abs(nums[0] - 24) < EPSILON;
+    }
+
+    const n = nums.length;
+    for (let i = 0; i < n; i++) {
+      for (let j = i + 1; j < n; j++) {
+        const a = nums[i];
+        const b = nums[j];
+        const rest = nums.filter((_, idx) => idx !== i && idx !== j);
+
+        const candidates = [a + b, a - b, b - a, a * b];
+        if (Math.abs(b) > EPSILON) candidates.push(a / b);
+        if (Math.abs(a) > EPSILON) candidates.push(b / a);
+
+        for (const val of candidates) {
+          if (dfs([...rest, val])) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
 }
 
 export function dealNewCards() {
-  // TODO:
-  // 1. Reset expression and usedCardIndices
-  // 2. Clear history
-  // 3. Generate 4 random numbers between 1 and 9
-  // 4. Repeat until judgePoint24 returns true
-  // 5. Call renderCards()
-  // 6. Call updateExpressionDisplay()
+  expression = "";
+  usedCardIndices.clear();
+  if (historyEl) historyEl.innerHTML = "";
+
+  do {
+    currentCards = Array.from(
+      { length: 4 },
+      () => Math.floor(Math.random() * 9) + 1,
+    );
+  } while (!judgePoint24(currentCards));
+
+  renderCards();
+  updateExpressionDisplay();
 }
 
 function renderCards() {
-  // TODO:
   // 1. Clear cardsEl
+  cardsEl.innerHTML = "";
   // 2. For each card, create a <button> with:
-  //    - class "card"
-  //    - data-testid="card-{i}"
-  //    - data-index="{i}"
-  //    - On click: append card value to expression,
-  //      mark index as used, disable button,
-  //      call updateExpressionDisplay()
+  currentCards.forEach((card, i) => {
+    const btn = document.createElement("button");
+    btn.className = "card";
+    btn.textContent = card.toString();
+    btn.dataset.testid = `card-${i}`;
+    btn.dataset.value = card.toString();
+    btn.dataset.index = i.toString();
+    btn.addEventListener("click", () => {
+      expression += card.toString();
+      usedCardIndices.add(i);
+      updateExpressionDisplay();
+      btn.disabled = true;
+    });
+    cardsEl.appendChild(btn);
+  });
 }
 
 function updateExpressionDisplay() {
-  // TODO:
-  // 1. Set exprEl.textContent = expression
-  // 2. Try eval(expression)
-  // 3. Show result if valid, otherwise show "= ?"
+  exprEl.textContent = expression;
+  try {
+    const val = eval(expression);
+    resultEl.textContent = "= " + val;
+  } catch {
+    resultEl.textContent = "= ?";
+  }
 }
 
 function clearExpression() {
-  // TODO:
-  // 1. Reset expression to ""
-  // 2. Clear usedCardIndices
-  // 3. Re-enable all .card buttons
-  // 4. Call updateExpressionDisplay()
+  expression = "";
+  usedCardIndices.clear();
+  updateExpressionDisplay();
+  document.querySelectorAll(".card").forEach((btn) => (btn.disabled = false));
 }
 
 function undo() {
