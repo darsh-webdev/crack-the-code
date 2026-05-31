@@ -63,6 +63,7 @@ export function judgePoint24(cards) {
     }
     return false;
   }
+  return dfs(cards.map(Number));
 }
 
 export function dealNewCards() {
@@ -120,19 +121,29 @@ function clearExpression() {
 }
 
 function undo() {
-  // TODO:
-  // 1. Remove last character from expression
-  // 2. If it was a number, find the matching used card
-  //    and re-enable it, remove from usedCardIndices
-  // 3. Call updateExpressionDisplay()
+  const lastChar = expression.slice(-1);
+  expression = expression.slice(0, -1);
+
+  if (!isNaN(parseInt(lastChar, 10))) {
+    for (let i = currentCards.length - 1; i >= 0; i--) {
+      if (
+        currentCards[i] === parseInt(lastChar, 10) &&
+        usedCardIndices.has(i)
+      ) {
+        document.querySelector(`[data-testid="${i}"]`).disabled = false;
+        usedCardIndices.delete(i);
+        break;
+      }
+    }
+  }
+  updateExpressionDisplay();
 }
 
 function addHistory(move) {
-  // TODO:
-  // 1. Create a <li> element
-  // 2. Set its textContent to move
-  // 3. Set data-testid="history-item-{index}"
-  // 4. Append to historyEl
+  const li = document.createElement("li");
+  li.textContent = move;
+  li.setAttribute("data-testid", `history-item-${historyEl.children.length}`);
+  historyEl.appendChild(li);
 }
 
 export function init() {
