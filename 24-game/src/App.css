@@ -56,6 +56,12 @@ body {
   cursor: pointer;
 }
 
+.card:disabled {
+  background: var(--accent-bg);
+  color: var(--text-h);
+  cursor: not-allowed;
+}
+
 .expr {
   width: 100%;
   min-height: 110px;

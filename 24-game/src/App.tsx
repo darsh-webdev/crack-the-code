@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { init, dealNewCards } from "./TwentyFourGame";
 import "./App.css";
 

@@ -1,44 +1,16 @@
-// ===============================
-// 24 Game Boilerplate
-// ===============================
-//
-// TODO:
-// Complete the implementation of this game.
-//
-// Rules:
-// 1. Four random cards (numbers 1 to 9) are dealt.
-// 2. The player must use all four cards exactly once.
-// 3. Allowed operations: +, -, *, /, and parentheses.
-// 4. If the final result is 24, the player wins.
-//
-// Your Tasks:
-// - Implement judgePoint24(cards)
-// - Implement dealNewCards()
-// - Implement renderCards()
-// - Implement updateExpressionDisplay()
-// - Implement clearExpression()
-// - Implement undo()
-// - Implement addHistory()
-// - Complete the event handlers in init()
-//
-// Hint:
-// Use `eval(expression)` to calculate the expression.
-//
-// ===============================
-
-let currentCards = [];
-let usedCardIndices = new Set();
+let currentCards: number[] = [];
+const usedCardIndices = new Set<number>();
 let expression = "";
 
-let cardsEl;
-let exprEl;
-let resultEl;
-let historyEl;
+let cardsEl: HTMLElement;
+let exprEl: HTMLElement;
+let resultEl: HTMLElement;
+let historyEl: HTMLElement;
 
-export function judgePoint24(cards) {
+export function judgePoint24(cards: number[]): boolean {
   const EPSILON = 1e-6;
 
-  function dfs(nums) {
+  function dfs(nums: number[]): boolean {
     if (nums.length === 1) {
       return Math.abs(nums[0] - 24) < EPSILON;
     }
@@ -49,7 +21,6 @@ export function judgePoint24(cards) {
         const a = nums[i];
         const b = nums[j];
         const rest = nums.filter((_, idx) => idx !== i && idx !== j);
-
         const candidates = [a + b, a - b, b - a, a * b];
         if (Math.abs(b) > EPSILON) candidates.push(a / b);
         if (Math.abs(a) > EPSILON) candidates.push(b / a);
@@ -61,15 +32,18 @@ export function judgePoint24(cards) {
         }
       }
     }
+
     return false;
   }
+
   return dfs(cards.map(Number));
 }
 
-export function dealNewCards() {
+export function dealNewCards(): void {
   expression = "";
   usedCardIndices.clear();
-  if (historyEl) historyEl.innerHTML = "";
+
+  historyEl.innerHTML = "";
 
   do {
     currentCards = Array.from(
@@ -82,29 +56,30 @@ export function dealNewCards() {
   updateExpressionDisplay();
 }
 
-function renderCards() {
-  // 1. Clear cardsEl
+function renderCards(): void {
   cardsEl.innerHTML = "";
-  // 2. For each card, create a <button> with:
-  currentCards.forEach((card, i) => {
+
+  currentCards.forEach((n, i) => {
     const btn = document.createElement("button");
     btn.className = "card";
-    btn.textContent = card.toString();
-    btn.dataset.testid = `card-${i}`;
-    btn.dataset.value = card.toString();
-    btn.dataset.index = i.toString();
+    btn.textContent = String(n);
+    btn.dataset.value = String(n);
+    btn.dataset.index = String(i);
+    btn.setAttribute("data-testid", `card-${i}`);
     btn.addEventListener("click", () => {
-      expression += card.toString();
+      expression += String(n);
       usedCardIndices.add(i);
       updateExpressionDisplay();
       btn.disabled = true;
     });
+
     cardsEl.appendChild(btn);
   });
 }
 
-function updateExpressionDisplay() {
+function updateExpressionDisplay(): void {
   exprEl.textContent = expression;
+
   try {
     const val = eval(expression);
     resultEl.textContent = "= " + val;
@@ -113,14 +88,16 @@ function updateExpressionDisplay() {
   }
 }
 
-function clearExpression() {
+function clearExpression(): void {
   expression = "";
   usedCardIndices.clear();
   updateExpressionDisplay();
-  document.querySelectorAll(".card").forEach((btn) => (btn.disabled = false));
+  document.querySelectorAll<HTMLButtonElement>(".card").forEach((btn) => {
+    btn.disabled = false;
+  });
 }
 
-function undo() {
+function undo(): void {
   const lastChar = expression.slice(-1);
   expression = expression.slice(0, -1);
 
@@ -130,81 +107,108 @@ function undo() {
         currentCards[i] === parseInt(lastChar, 10) &&
         usedCardIndices.has(i)
       ) {
-        document.querySelector(`[data-testid="${i}"]`).disabled = false;
+        const btn = document.querySelector<HTMLButtonElement>(
+          `[data-testid="card-${i}"]`,
+        );
+
+        if (btn) {
+          btn.disabled = false;
+        }
+
         usedCardIndices.delete(i);
+
         break;
       }
     }
   }
+
   updateExpressionDisplay();
 }
 
-function addHistory(move) {
+function addHistory(move: string): void {
   const li = document.createElement("li");
   li.textContent = move;
   li.setAttribute("data-testid", `history-item-${historyEl.children.length}`);
   historyEl.appendChild(li);
 }
 
-export function init() {
-  cardsEl = document.getElementById("cards");
-  exprEl = document.getElementById("expression");
-  resultEl = document.getElementById("result");
-  historyEl = document.getElementById("history");
+export function init(): void {
+  cardsEl = document.getElementById("cards")!;
+  exprEl = document.getElementById("expression")!;
+  resultEl = document.getElementById("result")!;
+  historyEl = document.getElementById("history")!;
 
-  document.getElementById("btn-add").onclick = () => {
-    // TODO: Append "+" to expression, update display
+  document.getElementById("btn-add")!.onclick = () => {
+    expression += "+";
+    updateExpressionDisplay();
   };
 
-  document.getElementById("btn-sub").onclick = () => {
-    // TODO: Append "-" to expression, update display
+  document.getElementById("btn-sub")!.onclick = () => {
+    expression += "-";
+    updateExpressionDisplay();
   };
 
-  document.getElementById("btn-mul").onclick = () => {
-    // TODO: Append "*" to expression, update display
+  document.getElementById("btn-mul")!.onclick = () => {
+    expression += "*";
+    updateExpressionDisplay();
   };
 
-  document.getElementById("btn-div").onclick = () => {
-    // TODO: Append "/" to expression, update display
+  document.getElementById("btn-div")!.onclick = () => {
+    expression += "/";
+    updateExpressionDisplay();
   };
 
-  document.getElementById("btn-lp").onclick = () => {
-    // TODO: Append "(" to expression, update display
+  document.getElementById("btn-lp")!.onclick = () => {
+    expression += "(";
+    updateExpressionDisplay();
   };
 
-  document.getElementById("btn-rp").onclick = () => {
-    // TODO: Append ")" to expression, update display
+  document.getElementById("btn-rp")!.onclick = () => {
+    expression += ")";
+    updateExpressionDisplay();
   };
 
-  document.getElementById("btn-undo").onclick = () => {
-    // TODO: Call undo()
+  document.getElementById("btn-undo")!.onclick = undo;
+
+  document.getElementById("btn-clear")!.onclick = clearExpression;
+
+  document.getElementById("btn-check")!.onclick = () => {
+    if (usedCardIndices.size !== 4) {
+      alert("You must use all four cards.");
+      return;
+    }
+
+    try {
+      const val = eval(expression);
+
+      if (Math.abs(val - 24) < 1e-6) {
+        resultEl.textContent = "= 24 🎉";
+
+        addHistory(`✅ ${expression} = 24`);
+      } else {
+        resultEl.textContent = `= ${val} ❌`;
+
+        addHistory(`❌ ${expression} = ${val}`);
+      }
+    } catch {
+      resultEl.textContent = `Invalid Expression ❌`;
+
+      addHistory(`Invalid: ${expression}`);
+    }
   };
 
-  document.getElementById("btn-clear").onclick = () => {
-    // TODO: Call clearExpression()
-  };
+  document.getElementById("btn-new")!.onclick = () => dealNewCards();
 
-  document.getElementById("btn-check").onclick = () => {
-    // TODO:
-    // 1. Check usedCardIndices.size === 4, alert if not
-    // 2. eval(expression)
-    // 3. If result === 24: show "= 24 🎉", addHistory with ✅
-    // 4. Else: show wrong result with ❌, addHistory
-    // 5. Catch invalid expression, show error, addHistory
-  };
+  document.getElementById("btn-shuffle")!.onclick = () => dealNewCards();
 
-  document.getElementById("btn-new").onclick = () => {
-    // TODO: Call dealNewCards()
-  };
+  document.getElementById("btn-giveup")!.onclick = () => {
+    const solvable = judgePoint24(currentCards);
 
-  document.getElementById("btn-shuffle").onclick = () => {
-    // TODO: Call dealNewCards()
-  };
-
-  document.getElementById("btn-giveup").onclick = () => {
-    // TODO:
-    // 1. Call judgePoint24(currentCards)
-    // 2. If solvable: alert user to keep trying
-    // 3. If not solvable: alert user, call dealNewCards()
+    if (solvable) {
+      alert("This set is solvable! Try again!");
+    } else {
+      alert("This set is NOT solvable. Dealing new cards.");
+      dealNewCards();
+    }
   };
 }
