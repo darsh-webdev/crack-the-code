@@ -39,6 +39,84 @@ export function judgePoint24(cards: number[]): boolean {
   return dfs(cards.map(Number));
 }
 
+function findOneSolution(cards: number[]): string | null {
+  const EPSILON = 1e-6;
+
+  type Node = {
+    value: number;
+    expr: string;
+  };
+
+  const nodes: Node[] = cards.map((n) => ({
+    value: n,
+    expr: String(n),
+  }));
+
+  function dfs(arr: Node[]): string | null {
+    if (arr.length === 1) {
+      if (Math.abs(arr[0].value - 24) < EPSILON) {
+        return arr[0].expr;
+      }
+
+      return null;
+    }
+
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = i + 1; j < arr.length; j++) {
+        const a = arr[i];
+        const b = arr[j];
+
+        const rest = arr.filter((_, idx) => idx !== i && idx !== j);
+
+        const candidates: Node[] = [
+          {
+            value: a.value + b.value,
+            expr: `(${a.expr} + ${b.expr})`,
+          },
+          {
+            value: a.value - b.value,
+            expr: `(${a.expr} - ${b.expr})`,
+          },
+          {
+            value: b.value - a.value,
+            expr: `(${b.expr} - ${a.expr})`,
+          },
+          {
+            value: a.value * b.value,
+            expr: `(${a.expr} * ${b.expr})`,
+          },
+        ];
+
+        if (Math.abs(b.value) > EPSILON) {
+          candidates.push({
+            value: a.value / b.value,
+            expr: `(${a.expr} / ${b.expr})`,
+          });
+        }
+
+        if (Math.abs(a.value) > EPSILON) {
+          candidates.push({
+            value: b.value / a.value,
+            expr: `(${b.expr} / ${a.expr})`,
+          });
+        }
+
+        for (const candidate of candidates) {
+          const result = dfs([...rest, candidate]);
+
+          if (result) {
+            return result;
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
+  return dfs(nodes);
+}
+
 export function dealNewCards(): void {
   expression = "";
   usedCardIndices.clear();
@@ -205,7 +283,19 @@ export function init(): void {
     const solvable = judgePoint24(currentCards);
 
     if (solvable) {
-      alert("This set is solvable! Try again!");
+      const wantsSolution = confirm(
+        "This set is solvable! Do you want to see one possible solution?",
+      );
+
+      if (wantsSolution) {
+        const solution = findOneSolution(currentCards);
+
+        if (solution) {
+          alert(`One possible solution is:\n\n${solution} = 24`);
+        } else {
+          alert("Could not find a solution.");
+        }
+      }
     } else {
       alert("This set is NOT solvable. Dealing new cards.");
       dealNewCards();
