@@ -1,0 +1,195 @@
+/* App.css */
+
+.confetti-container {
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 28px 18px;
+  border-radius: 24px;
+
+  position: relative;
+  overflow: hidden;
+
+  background: linear-gradient(135deg, #6177db 0%, #8b5fc7 100%);
+
+  box-shadow:
+    inset 0 0 40px rgba(255, 255, 255, 0.08),
+    0 10px 24px rgba(88, 64, 145, 0.22);
+}
+
+.confetti-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at 20% 50%,
+      rgba(255, 255, 255, 0.12),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.1),
+      transparent 18%
+    ),
+    radial-gradient(
+      circle at 80% 50%,
+      rgba(255, 255, 255, 0.1),
+      transparent 18%
+    );
+
+  pointer-events: none;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.1;
+
+  margin-bottom: 36px;
+
+  text-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.22),
+    0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  margin-bottom: 36px;
+}
+
+.controls button {
+  width: 100%;
+  max-width: 280px;
+  height: 64px;
+
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+
+  color: white;
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    inset 0 2px 4px rgba(255, 255, 255, 0.18);
+}
+
+.controls button:hover {
+  transform: translateY(-2px);
+}
+
+.controls button:active {
+  transform: scale(0.98);
+}
+
+.controls button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.celebrate-button {
+  background: linear-gradient(90deg, #ff7769 0%, #f6bd53 100%);
+}
+
+.reset-button {
+  background: linear-gradient(90deg, #4ecdc4 0%, #48b38f 100%);
+}
+
+.particle-info {
+  text-align: center;
+  color: white;
+
+  margin-bottom: 28px;
+}
+
+.particle-info p:first-child {
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  margin-bottom: 12px;
+
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+}
+
+.instruction {
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.5;
+
+  opacity: 0.95;
+
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
+}
+
+.confetti-canvas {
+  width: 100%;
+  height: 420px;
+
+  position: relative;
+  overflow: hidden;
+
+  border-radius: 22px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 3px solid rgba(255, 255, 255, 0.14);
+
+  backdrop-filter: blur(10px);
+}
+
+/* particles */
+.particle {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+/* mobile */
+@media (max-width: 480px) {
+  .confetti-container {
+    padding: 22px 14px;
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 28px;
+  }
+
+  .controls {
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .controls button {
+    max-width: 240px;
+    height: 56px;
+    font-size: 1.15rem;
+  }
+
+  .particle-info p:first-child {
+    font-size: 1.25rem;
+  }
+
+  .instruction {
+    font-size: 0.92rem;
+  }
+
+  .confetti-canvas {
+    height: 320px;
+    border-radius: 18px;
+  }
+}
