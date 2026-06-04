@@ -19,19 +19,36 @@ const COLORS = [
   "#F1948A",
   "#85C1E9",
   "#D7BDE2",
-];
+] as const;
 
-const SHAPES = ["circle", "square", "triangle", "star"];
+const SHAPES = ["circle", "square", "triangle", "star"] as const;
+
+type Shape = (typeof SHAPES)[number];
+
+type Particle = {
+  id: number;
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  color: string;
+  shape: Shape;
+  size: number;
+  rotation: number;
+  rotationSpeed: number;
+  life: number;
+  decay: number;
+};
 
 function App() {
-  const [particles, setParticles] = useState([]);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [particleCount, setParticleCount] = useState(0);
-  const animationRef = useRef();
-  const containerRef = useRef();
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [particleCount, setParticleCount] = useState<number>(0);
+  const animationRef = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   // TODO: Implement createParticle function
-  const createParticle = useCallback((x, y) => {
+  const createParticle = useCallback((x: number, y: number) => {
     // TODO: Generate random particle properties
     // - Random angle and velocity for initial burst
     // - Random color from COLORS array
@@ -82,7 +99,7 @@ function App() {
   }, []);
 
   // TODO: Implement renderParticle function
-  const renderParticle = (particle) => {
+  const renderParticle = (particle: Particle) => {
     // TODO: Create particle style object with:
     // - Absolute positioning
     // - Color and opacity
