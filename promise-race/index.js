@@ -8,11 +8,10 @@
 
 function promiseRace(promises) {
   return new Promise((resolve, reject) => {
-    // Promise.race([]) never settles
     if (promises.length === 0) return;
 
     for (const promise of promises) {
-      Promise.resolve(promise).then(resolve).catch(reject);
+      Promise.resolve(promise).then(resolve, reject);
     }
   });
 }
