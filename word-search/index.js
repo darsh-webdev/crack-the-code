@@ -21,35 +21,11 @@ function findWords(board, words) {
     return [];
   }
 
-  // ---------- Build Trie ----------
-  class TrieNode {
-    constructor() {
-      this.children = {};
-      this.word = null;
-    }
-  }
-
-  const root = new TrieNode();
-
-  for (const word of words) {
-    let node = root;
-
-    for (const ch of word) {
-      if (!node.children[ch]) {
-        node.children[ch] = new TrieNode();
-      }
-
-      node = node.children[ch];
-    }
-
-    node.word = word;
-  }
-
   const rows = board.length;
   const cols = board[0].length;
   const result = [];
 
-  // 8 Directions
+  // 8 possible directions
   const directions = [
     [-1, -1],
     [-1, 0],
@@ -61,39 +37,46 @@ function findWords(board, words) {
     [1, 1],
   ];
 
-  function dfs(r, c, node) {
-    if (r < 0 || c < 0 || r >= rows || c >= cols || board[r][c] === "#") {
-      return;
+  function dfs(row, col, word, index) {
+    // Entire word found
+    if (index === word.length) {
+      return true;
     }
 
-    const char = board[r][c];
-
-    if (!node.children[char]) {
-      return;
+    // Out of bounds
+    if (row < 0 || row >= rows || col < 0 || col >= cols) {
+      return false;
     }
 
-    node = node.children[char];
-
-    // Found a word
-    if (node.word !== null) {
-      result.push(node.word);
-
-      // Prevent duplicates
-      node.word = null;
+    // Character mismatch or already visited
+    if (board[row][col] !== word[index]) {
+      return false;
     }
 
-    board[r][c] = "#";
+    const temp = board[row][col];
+    board[row][col] = "#";
 
     for (const [dr, dc] of directions) {
-      dfs(r + dr, c + dc, node);
+      if (dfs(row + dr, col + dc, word, index + 1)) {
+        board[row][col] = temp;
+        return true;
+      }
     }
 
-    board[r][c] = char;
+    board[row][col] = temp;
+    return false;
   }
 
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      dfs(r, c, root);
+  for (const word of words) {
+    let found = false;
+
+    for (let i = 0; i < rows && !found; i++) {
+      for (let j = 0; j < cols && !found; j++) {
+        if (dfs(i, j, word, 0)) {
+          result.push(word);
+          found = true;
+        }
+      }
     }
   }
 
