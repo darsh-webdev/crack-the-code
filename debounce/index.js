@@ -16,13 +16,16 @@
 
 function debounce(fn, delay) {
   let timerId = null;
+  let lastResult;
 
   return function (...args) {
     clearTimeout(timerId);
 
     timerId = setTimeout(() => {
-      fn.apply(this, args);
+      lastResult = fn.apply(this, args);
     }, delay);
+
+    return lastResult;
   };
 }
 
