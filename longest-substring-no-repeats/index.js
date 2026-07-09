@@ -6,23 +6,24 @@
 */
 
 function lengthOfLongestSubstring(s) {
-  const seen = new Map(); // Stores the last index of each character
+  const lastSeen = new Map();
+
   let left = 0;
   let maxLength = 0;
 
   for (let right = 0; right < s.length; right++) {
-    const char = s[right];
+    const currentChar = s[right];
 
-    // If the character is already in the current window,
-    // move the left pointer just after its previous occurrence.
-    if (seen.has(char) && seen.get(char) >= left) {
-      left = seen.get(char) + 1;
+    // If character exists in current window,
+    // move left pointer after its previous occurrence
+    if (lastSeen.has(currentChar) && lastSeen.get(currentChar) >= left) {
+      left = lastSeen.get(currentChar) + 1;
     }
 
-    // Update the last seen index
-    seen.set(char, right);
+    // Update latest index of current character
+    lastSeen.set(currentChar, right);
 
-    // Update maximum window length
+    // Update answer
     maxLength = Math.max(maxLength, right - left + 1);
   }
 
