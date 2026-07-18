@@ -51,4 +51,12 @@ const delayFn = async (x) => {
 const result = await mapAsyncLimit([1, 2, 3, 4], 2, delayFn);
 console.log(result); // Output: [2, 4, 6, 8]
 
+// Example usage of mapAsyncLimit with a limit of 1
+const result2 = await mapAsyncLimit([1, 2, 3], 1, delayFn);
+console.log(result2); // Output: [2, 4, 6]
+
+// Example usage of mapAsyncLimit with a limit of 2 and synchronous function
+const result3 = await mapAsyncLimit([1, 2, 3], 2, (x) => x * 10);
+console.log(result3); // Output: [10, 20, 30]
+
 export default mapAsyncLimit;
