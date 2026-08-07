@@ -15,7 +15,7 @@
 */
 
 function shortestDistance(graph, src) {
-  // Input validation
+  // Handle invalid inputs gracefully
   if (
     !Array.isArray(graph) ||
     !Number.isInteger(src) ||
@@ -27,35 +27,51 @@ function shortestDistance(graph, src) {
 
   const n = graph.length;
 
-  const dist = new Array(n).fill(Infinity);
+  // Int32Array is smaller & faster to allocate/access than a generic Array.
+  // Use -1 as "unvisited" sentinel since typed arrays can't hold Infinity.
+  const dist = new Int32Array(n).fill(-1);
   dist[src] = 0;
 
-  const queue = [src];
+  // Preallocate the queue to its max possible size (n) instead of letting
+  // it grow dynamically via push(). Avoids repeated resizing.
+  const queue = new Int32Array(n);
+  queue[0] = src;
   let head = 0;
+  let tail = 1;
 
-  while (head < queue.length) {
+  while (head < tail) {
     const node = queue[head++];
+    const neighbors = graph[node];
 
-    // Skip invalid adjacency lists
-    if (!Array.isArray(graph[node])) {
-      continue;
-    }
+    if (!Array.isArray(neighbors)) continue;
 
-    for (const neighbor of graph[node]) {
-      // Ignore invalid node indices
+    const len = neighbors.length;
+    const d = dist[node] + 1;
+
+    // Classic indexed for-loop: avoids iterator/generator overhead
+    // that for...of carries in V8 for plain arrays.
+    for (let i = 0; i < len; i++) {
+      const neighbor = neighbors[i];
+
       if (!Number.isInteger(neighbor) || neighbor < 0 || neighbor >= n) {
         continue;
       }
 
-      // First visit = shortest path
-      if (dist[neighbor] === Infinity) {
-        dist[neighbor] = dist[node] + 1;
-        queue.push(neighbor);
+      if (dist[neighbor] === -1) {
+        dist[neighbor] = d;
+        queue[tail++] = neighbor;
       }
     }
   }
 
-  return dist;
+  // Convert sentinel back to Infinity to preserve the original API/contract.
+  const result = new Array(n);
+  for (let i = 0; i < n; i++) {
+    result[i] = dist[i] === -1 ? Infinity : dist[i];
+  }
+  result[src] = 0; // guaranteed, but cheap to keep explicit
+
+  return result;
 }
 
 // For user debugging and testing purposes
