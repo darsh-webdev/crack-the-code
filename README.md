@@ -4,27 +4,13 @@ A curated collection of **JavaScript** and **React** mini projects, components, 
 
 ---
 
-## 📚 What You'll Find
+## 📁 Repository Structure
 
-This repository includes well-structured solutions and implementations across:
+The codebase is organized into the following main directories:
 
-### 🧠 JavaScript Fundamentals
-- Core concepts (closures, promises, async/await)
-- Data structures & algorithms
-- Common interview questions
-
-### ⚛️ React Components
-- Reusable UI components
-- Modern React patterns (hooks, state management)
-- Best practices and optimization techniques
-
-### 🧩 Problem Solving
-- Frequently asked interview problems
-- Clean, readable, and optimized solutions
-
-### 🛠️ Mini Projects
-- Hands-on projects demonstrating real-world use cases
-- Focus on practical implementation and scalability
+- ⚛️ **`react/`**: All React-based mini-projects, UI components, custom hooks, and interactive applications.
+- 🟨 **`javascript/`**: JavaScript problem-solving exercises, data structure implementations, utility functions, and polyfills.
+- 🧠 **`javascript-core-concepts/`**: Core JavaScript foundational topics and theoretical concepts.
 
 ---
 
@@ -35,13 +21,12 @@ Make sure you have the following installed:
 - Node.js (v14 or higher)
 - npm or yarn
 
-### 📦 Installation
+### 📦 Running Projects
 
-> ⚠️ **Note:** The steps below apply only to **React projects** inside this repository.
-
-1. Navigate to the specific React project folder:
+#### ⚛️ React Projects
+1. Navigate to the specific React project folder inside `react/`:
 ```bash
-cd project-folder-name
+cd react/<project-folder-name>
 ```
 
 2. Install dependencies:
@@ -49,9 +34,21 @@ cd project-folder-name
 npm install
 ```
 
-3. Run the project:
+3. Start the application:
 ```bash
-npm run start
+npm run dev
+# or npm start depending on the project
+```
+
+#### 🟨 JavaScript Projects
+1. Navigate to the specific JavaScript project folder inside `Javascript/`:
+```bash
+cd Javascript/<project-folder-name>
+```
+
+2. Run the script using Node.js:
+```bash
+node index.js
 ```
 
 ---
