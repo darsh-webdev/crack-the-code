@@ -1,0 +1,57 @@
+.title {
+  text-align: center;
+  color: var(--accent);
+  margin-top: 5rem;
+}
+
+.stepper {
+  margin: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepper-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.step-number {
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  background-color: grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+}
+
+.step-line {
+  height: 2.5rem;
+  width: 2px;
+  background-color: grey;
+  position: absolute;
+  top: 2.5rem;
+}
+
+.active {
+  background-color: var(--accent);
+}
+
+.stepper-content {
+  text-align: center;
+  color: var(--text-h);
+}
+
+button {
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin: 10px;
+}
