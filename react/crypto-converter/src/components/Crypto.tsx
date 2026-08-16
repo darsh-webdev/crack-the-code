@@ -44,12 +44,12 @@ const Crypto = () => {
 
     fetchConversionRate();
 
-    const timer = setInterval(fetchConversionRate, 500000);
+    const timer = setInterval(fetchConversionRate, 5000); // Fetch every 5 seconds
 
     return () => {
       clearInterval(timer);
     };
-  }, [currency]);
+  }, [currency, conversionRate]);
 
   const convertedAmount =
     typeof amount === "number" && conversionRate > 0
