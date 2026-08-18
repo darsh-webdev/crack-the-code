@@ -1,0 +1,92 @@
+h1 {
+  color: var(--accent);
+}
+
+.calendar {
+  position: relative;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  left: 4rem;
+  width: 1px;
+  height: 100%;
+  background-color: var(--accent-border);
+  z-index: 1;
+}
+
+.slot {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--accent-border);
+  box-sizing: border-box;
+}
+
+.time-label {
+  position: absolute;
+  top: -0.5em;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--text-h);
+  background: var(--accent-bg);
+  padding: 0 0.15rem;
+}
+
+/* Hide the label on the very first slot so "00:00" doesn't clip */
+.slot:first-child .time-label {
+  display: none;
+}
+
+.event {
+  position: absolute;
+  box-sizing: border-box;
+  background-color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0.4rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow: hidden;
+  border-left: 3px solid rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
+  gap: 0.15rem;
+  border: 1px solid var(--accent-border);
+  z-index: 2;
+}
+
+.event:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+  z-index: 10;
+  background-color: var(--accent-border);
+}
+
+.event-title {
+  font-weight: 600;
+  font-size: 0.75rem;
+  line-height: 1.2;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  color: var(--text-h);
+}
+
+.event-time {
+  font-size: 0.65rem;
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  line-height: 1.2;
+  color: var(--text-h);
+}
