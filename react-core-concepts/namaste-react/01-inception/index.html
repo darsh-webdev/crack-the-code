@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css">
+    <title>Namaste React - Episode 1: Inception</title>
+</head>
+
+<body>
+    <!-- =========================================================
+         1. Hello World using ONLY HTML
+         ========================================================= -->
+
+    <section class="html-section">
+        <h2>Hello World - HTML</h2>
+
+        <div>
+            <h1>Hello World using only HTML!</h1>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         2. Hello World using ONLY JavaScript
+
+         This demonstrates the traditional DOM approach.
+         ========================================================= -->
+    <section class="js-section">
+        <h2>Hello World - JavaScript</h2>
+
+        <div id="js-root"></div>
+        <script>
+            const jsHeading = document.createElement("h1");
+            jsHeading.innerHTML = "Hello World using JavaScript!";
+            const jsRoot = document.getElementById("js-root");
+            jsRoot.appendChild(jsHeading);
+        </script>
+    </section>
+
+    <!-- =========================================================
+         3. React Root
+         React will render into this element
+         ========================================================= -->
+
+    <section class="react-section">
+        <h2>Hello World - React</h2>
+
+        <div id="root"></div>
+    </section>
+
+
+    <!-- React -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <!-- ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="App.js"></script>
+</body>
+
+</html>
