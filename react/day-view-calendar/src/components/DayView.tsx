@@ -1,57 +1,6 @@
-import type { CalendarEvent } from "../utils/eventLayout";
 import DayTimeSlots from "./DayTimeSlots";
 import Events from "./Events";
-
-const events: CalendarEvent[] = [
-  {
-    id: 1,
-    title: "Morning Meeting",
-    start: "09:00:00",
-    end: "10:00:00",
-  },
-  {
-    id: 2,
-    title: "Lunch Break",
-    start: "12:00:00",
-    end: "13:00:00",
-  },
-  {
-    id: 3,
-    title: "Team Standup",
-    start: "09:15:00",
-    end: "09:50:00",
-  },
-  {
-    id: 4,
-    title: "Team Sync",
-    start: "10:30:00",
-    end: "11:30:00",
-  },
-  {
-    id: 5,
-    title: "Client Call",
-    start: "14:00:00",
-    end: "15:00:00",
-  },
-  {
-    id: 6,
-    title: "Evening Review",
-    start: "16:00:00",
-    end: "17:00:00",
-  },
-  {
-    id: 7,
-    title: "Project Discussion",
-    start: "10:00:00",
-    end: "11:00:00",
-  },
-  {
-    id: 8,
-    title: "Code Review",
-    start: "10:45:00",
-    end: "11:30:00",
-  },
-];
+import events from "../data/events.json"
 
 const SLOT_HEIGHT_REM = 5;
 
