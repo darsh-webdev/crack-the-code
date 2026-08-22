@@ -1,0 +1,17 @@
+{
+  "name": "02-igniting-our-app",
+  "version": "1.0.0",
+  "description": "Episode 2 of  Namaste React",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  }
+}
