@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 const heading = React.createElement(
     "h1",
     {},
-    "Hello World from React Package!"
+    "Complete Episode 2 🚀"
 );
 
 const root = ReactDOM.createRoot(
