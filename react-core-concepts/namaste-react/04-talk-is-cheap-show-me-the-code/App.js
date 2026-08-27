@@ -16,10 +16,28 @@ import ReactDOM from "react-dom/client";
  *  - Contact 
  */
 
+const Header = () => {
+    return (
+        <div className="header">
+            <div className="logo-container">
+                <img className="logo" src="https://img.magnific.com/free-vector/food-shopping-logo-template-design_460848-10299.jpg" />
+            </div>
+            <div className="nav-items">
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>Cart</li>
+                </ul>
+            </div>
+        </div>
+    )
+}
+
 const AppLayout = () => {
     return (
         <div className="app">
-            <h1>Food Delivery App 🚀</h1>
+            <Header />
         </div>
     )
 }
