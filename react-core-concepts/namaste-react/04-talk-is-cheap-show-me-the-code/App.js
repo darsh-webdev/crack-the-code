@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 
 /**
@@ -23,6 +22,7 @@ import ReactDOM from "react-dom/client";
 
 const restaurantsList = [
     {
+        id: 1,
         imgLink: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
         name: "Pizza Paradise",
         cuisines: ["Pizza", "Italian", "Fast Food"],
@@ -31,6 +31,7 @@ const restaurantsList = [
         costForTwo: 500,
     },
     {
+        id: 2,
         imgLink: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd",
         name: "Burger Junction",
         cuisines: ["Burgers", "American", "Fast Food"],
@@ -39,6 +40,7 @@ const restaurantsList = [
         costForTwo: 400,
     },
     {
+        id: 3,
         imgLink: "https://images.unsplash.com/photo-1589302168068-964664d93dc0",
         name: "Biryani House",
         cuisines: ["Biryani", "Mughlai", "North Indian"],
@@ -47,6 +49,7 @@ const restaurantsList = [
         costForTwo: 600,
     },
     {
+        id: 4,
         imgLink: "https://images.unsplash.com/photo-1601050690597-df0568f70950",
         name: "Punjabi Tadka",
         cuisines: ["North Indian", "Punjabi", "Tandoor"],
@@ -55,6 +58,7 @@ const restaurantsList = [
         costForTwo: 550,
     },
     {
+        id: 5,
         imgLink: "https://images.unsplash.com/photo-1553621042-f6e147245754",
         name: "Tokyo Sushi Bar",
         cuisines: ["Japanese", "Sushi", "Asian"],
@@ -63,6 +67,7 @@ const restaurantsList = [
         costForTwo: 1200,
     },
     {
+        id: 6,
         imgLink: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8",
         name: "Pasta Street",
         cuisines: ["Italian", "Pasta", "Continental"],
@@ -71,6 +76,7 @@ const restaurantsList = [
         costForTwo: 700,
     },
     {
+        id: 7,
         imgLink: "https://images.unsplash.com/photo-1606491956689-2ea866880c84",
         name: "Mumbai Chaat Corner",
         cuisines: ["Street Food", "Chaat", "Indian"],
@@ -79,6 +85,7 @@ const restaurantsList = [
         costForTwo: 250,
     },
     {
+        id: 8,
         imgLink: "https://images.unsplash.com/photo-1630383249896-424e482df921",
         name: "South Indian Express",
         cuisines: ["South Indian", "Dosa", "Idli"],
@@ -87,6 +94,7 @@ const restaurantsList = [
         costForTwo: 350,
     },
     {
+        id: 9,
         imgLink: "https://images.unsplash.com/photo-1552566626-52f8b828add9",
         name: "The Royal Kitchen",
         cuisines: ["North Indian", "Chinese", "Continental"],
@@ -95,6 +103,7 @@ const restaurantsList = [
         costForTwo: 800,
     },
     {
+        id: 10,
         imgLink: "https://images.unsplash.com/photo-1550547660-d9450f859349",
         name: "Big Bite Burgers",
         cuisines: ["Burgers", "American", "Beverages"],
@@ -103,6 +112,7 @@ const restaurantsList = [
         costForTwo: 450,
     },
     {
+        id: 11,
         imgLink: "https://images.unsplash.com/photo-1603133872878-684f208fb84b",
         name: "Wok This Way",
         cuisines: ["Chinese", "Thai", "Asian"],
@@ -111,6 +121,7 @@ const restaurantsList = [
         costForTwo: 650,
     },
     {
+        id: 12,
         imgLink: "https://images.unsplash.com/photo-1574484284002-952d92456975",
         name: "Curry Culture",
         cuisines: ["Indian", "North Indian", "Mughlai"],
@@ -119,6 +130,7 @@ const restaurantsList = [
         costForTwo: 750,
     },
     {
+        id: 13,
         imgLink: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
         name: "La Pino's Kitchen",
         cuisines: ["Pizza", "Italian", "Desserts"],
@@ -127,6 +139,7 @@ const restaurantsList = [
         costForTwo: 600,
     },
     {
+        id: 14,
         imgLink: "https://images.unsplash.com/photo-1628294895950-9805252327bc",
         name: "Dragon Bowl",
         cuisines: ["Chinese", "Tibetan", "Momos"],
@@ -135,6 +148,7 @@ const restaurantsList = [
         costForTwo: 500,
     },
     {
+        id: 15,
         imgLink: "https://images.unsplash.com/photo-1547592180-85f173990554",
         name: "Green Bowl",
         cuisines: ["Healthy Food", "Salads", "Continental"],
@@ -188,17 +202,50 @@ const Body = () => {
                 Search
             </div>
             <div className="restaurant-container">
-                {restaurantsList.map(restaurant => <RestaurantCard key={restaurant.name} resData={restaurant} />)}
+                {restaurantsList.map(restaurant => <RestaurantCard key={restaurant.id} resData={restaurant} />)}
             </div>
         </div>
     )
 }
+
+const Footer = () => {
+    return (
+        <footer className="footer">
+            <div className="footer-section">
+                <h3>Foodie App</h3>
+                <p>© 2026 Foodie App. All rights reserved.</p>
+            </div>
+
+            <div className="footer-section">
+                <h3>Links</h3>
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+
+            <div className="footer-section">
+                <h3>Address</h3>
+                <p>123 Khau Gaali</p>
+                <p>Mumbai, India</p>
+            </div>
+
+            <div className="footer-section">
+                <h3>Contact</h3>
+                <p>📞 +91 98765 43210</p>
+                <p>✉️ support@foodieapp.com</p>
+            </div>
+        </footer>
+    );
+};
 
 const AppLayout = () => {
     return (
         <div className="app">
             <Header />
             <Body />
+            <Footer />
         </div>
     )
 }
