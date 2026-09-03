@@ -1,0 +1,19 @@
+{
+  "name": "05-lets-get-hooked",
+  "version": "1.0.0",
+  "description": "Namaste React - Episode 5",
+ "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  }
+}
