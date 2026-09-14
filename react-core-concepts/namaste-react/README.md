@@ -13,6 +13,7 @@ Welcome to the **Namaste React** core concepts series repository. This repositor
 | **03** | **Laying the Foundation** | NPM build scripts, JSX syntax, Babel transpilation, functional components, and component composition. | [View Episode 03](file:///Users/darshanrajput/Desktop/Projects/crack-the-code/react-core-concepts/namaste-react/03-laying-the-foundation/README.md) |
 | **04** | **Talk is Cheap, Show me the Code!** | UI architecture planning, Props, Config-Driven UI, list rendering via `.map()`, and `key` props. | [View Episode 04](file:///Users/darshanrajput/Desktop/Projects/crack-the-code/react-core-concepts/namaste-react/04-talk-is-cheap-show-me-the-code/README.md) |
 | **05** | **Let's Get Hooked!** | Modular folder architecture (`src/components`, `src/utils`), default vs named exports, React Hooks (`useState`), Virtual DOM & Reconciliation. | [View Episode 05](file:///Users/darshanrajput/Desktop/Projects/crack-the-code/react-core-concepts/namaste-react/05-lets-get-hooked/README.md) |
+| **06** | **Exploring the World!** | Microservices vs Monolithic architecture, CORS, `useEffect` Hook, Swiggy Live API integration, Shimmer UI (Conditional Rendering), Controlled Components, and Search filtering. | [View Episode 06](file:///Users/darshanrajput/Desktop/Projects/crack-the-code/react-core-concepts/namaste-react/06-exploring-the-world/README.md) |
 
 ---
 
@@ -45,3 +46,9 @@ Welcome to the **Namaste React** core concepts series repository. This repositor
 ### 🎣 [Episode 05: Let's Get Hooked!](file:///Users/darshanrajput/Desktop/Projects/crack-the-code/react-core-concepts/namaste-react/05-lets-get-hooked/README.md)
 - **Topics Learned**: Modular project architecture inside `src/` (`components/` & `utils/`), Default vs Named imports/exports, introduction to React Hooks (`useState`, `useEffect`), State vs Regular JS variables, Virtual DOM (VDOM), Reconciliation / Diffing algorithm, React Fiber architecture.
 - **Code Implemented**: Restructured app into modular files (`Header.js`, `Body.js`, `RestaurantCard.js`, `Footer.js`, `constants.js`, `mockData.js`), configured named export for `LOGO_URL` and default export for mock data & components.
+
+---
+
+### 🌐 [Episode 06: Exploring the World!](file:///Users/darshanrajput/Desktop/Projects/crack-the-code/react-core-concepts/namaste-react/06-exploring-the-world/README.md)
+- **Topics Learned**: Monolithic vs Microservices architecture, Render-First-Fetch-Later strategy, `useEffect()` hook execution & dependency array, CORS errors & API proxies (`corsproxy.io` with `.env`), Shimmer UI for loading states, Conditional Rendering, React state re-rendering mechanics vs regular variables, Controlled input components, case-insensitive search and filter logic.
+- **Code Implemented**: Integrated Swiggy live REST API with CORS proxy key in `.env`, created `Shimmer` loading component, implemented conditional rendering in `Body.js`, added search input & top-rated filter buttons, dynamic image fetching via `CLOUDINARY_URL`.
