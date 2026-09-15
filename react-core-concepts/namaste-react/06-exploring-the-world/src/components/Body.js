@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import RestaurantCard from "./RestaurantCard"
 import Shimmer from "./Shimmer"
 
+const CORS_API_KEY = process.env.API_KEY;
+
 const Body = () => {
     // Local State Variable -  Super powerful variable
     const [listOfRestaurants, setListOfRestaurants] = useState([])
@@ -13,7 +15,7 @@ const Body = () => {
 
 
     const fetchData = async () => {
-        const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const data = await fetch(`https://corsproxy.io/?key=${CORS_API_KEY}&url=https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.07480&lng=72.88560&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`);
         const json = await data.json();
         setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements.infoWithStyle.restaurants)
     }
