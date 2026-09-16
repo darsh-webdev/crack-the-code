@@ -1,0 +1,19 @@
+{
+  "name": "07-finding-the-path",
+  "version": "1.0.0",
+  "description": "Namaste React - Episode 7",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}
