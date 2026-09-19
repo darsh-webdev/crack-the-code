@@ -20,6 +20,17 @@
     cursor: pointer;
 }
 
+.login {
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
 .restaurant-container {
     display: flex;
     flex-wrap: wrap;
