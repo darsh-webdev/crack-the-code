@@ -9,6 +9,9 @@ const Body = () => {
     const [listOfRestaurants, setListOfRestaurants] = useState([])
     const [searchText, setSearchText] = useState("");
 
+    // If no depdency array => useEffect runs on every render
+    // If empty array => it runs only once
+    // If array with elements => it runs only when the element changes
     useEffect(() => {
         fetchData();
     }, [])
