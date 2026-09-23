@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import RestaurantCard from "./RestaurantCard"
 import Shimmer from "./Shimmer"
+import { CORS_API_KEY } from "../utils/constants"
 
-const CORS_API_KEY = process.env.API_KEY;
+
 
 const Body = () => {
     // Local State Variable -  Super powerful variable
