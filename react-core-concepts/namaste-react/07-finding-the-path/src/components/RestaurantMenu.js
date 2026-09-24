@@ -9,10 +9,29 @@ const RestaurantMenu = () => {
     }, [])
 
     const fetchMenu = async () => {
-        const data = await fetch(`https://corsproxy.io/?key=${CORS_API_KEY}&url=https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=19.07480&lng=72.88560&restaurantId=550871&submitAction=ENTER`)
-        const json = await data.json();
-        setResInfo(json?.data)
-    }
+        const swiggyUrl =
+            `https://www.swiggy.com/dapi/menu/pl` +
+            `?page-type=REGULAR_MENU` +
+            `&complete-menu=true` +
+            `&lat=19.07480` +
+            `&lng=72.88560` +
+            `&restaurantId=366927` +
+            `&submitAction=ENTER`;
+
+        const proxyUrl =
+            `https://corsproxy.io/?key=${CORS_API_KEY}` +
+            `&url=${encodeURIComponent(swiggyUrl)}`;
+
+        const response = await fetch(proxyUrl);
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
+        }
+
+        const json = await response.json();
+
+        setResInfo(json?.data);
+    };
 
     const { name, cuisines, costForTwoMessage } = resInfo?.cards[2]?.card?.card?.info;
 
