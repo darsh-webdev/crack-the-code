@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router"
 import RestaurantCard from "./RestaurantCard"
 import Shimmer from "./Shimmer"
 import { CORS_API_KEY } from "../utils/constants"
@@ -46,7 +47,10 @@ const Body = () => {
             </div>
             <div className="restaurant-container">
                 {listOfRestaurants.map(restaurant => (
-                    <RestaurantCard key={restaurant.info.id} resData={restaurant.info} />
+                    <Link key={restaurant.info.id} to={"restaurant/" + restaurant.info.id}>
+                        <RestaurantCard resData={restaurant.info} />
+                    </Link>
+
                 ))}
             </div>
         </div>

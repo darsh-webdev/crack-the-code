@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
-import { CORS_API_KEY } from "../utils/constants";
+import { useParams } from "react-router";
+import { CORS_API_KEY, MENU_API } from "../utils/constants";
 import Shimmer from "./Shimmer";
 
 const RestaurantMenu = () => {
     const [resInfo, setResInfo] = useState(null);
+    const { resId } = useParams();
+
     useEffect(() => {
         fetchMenu();
     }, [])
 
     const fetchMenu = async () => {
         const swiggyUrl =
-            `https://www.swiggy.com/dapi/menu/pl` +
-            `?page-type=REGULAR_MENU` +
-            `&complete-menu=true` +
-            `&lat=19.07480` +
-            `&lng=72.88560` +
-            `&restaurantId=366927` +
-            `&submitAction=ENTER`;
+            `${MENU_API + resId}`;
 
         const proxyUrl =
             `https://corsproxy.io/?key=${CORS_API_KEY}` +
@@ -36,6 +33,7 @@ const RestaurantMenu = () => {
     if (resInfo === null) return <Shimmer />
 
     const { name, cuisines, costForTwoMessage } = resInfo?.cards[2]?.card?.card?.info;
+    const { itemCards } = resInfo?.cards[3]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
 
     return (
         <div className="menu">
@@ -43,9 +41,9 @@ const RestaurantMenu = () => {
             <h3>{cuisines.join(", ") - costForTwoMessage}</h3>
             <h2>Menu</h2>
             <ul>
-                <li>Item Name - Price</li>
-                <li>Item Name - Price</li>
-                <li>Item Name - Price</li>
+                {itemCards.map(item => (
+                    <li key={item.card.info.id}>{item.card.info.name} - ₹{item.card.info.price / 100}</li>
+                ))}
             </ul>
         </div>
     )
