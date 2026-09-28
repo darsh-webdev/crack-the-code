@@ -14,6 +14,7 @@ Welcome to the **Namaste React** core concepts series repository. This repositor
 | **04** | **Talk is Cheap, Show me the Code!** | UI architecture planning, Props, Config-Driven UI, list rendering via `.map()`, and `key` props. | [View Episode 04](./04-talk-is-cheap-show-me-the-code/README.md) |
 | **05** | **Let's Get Hooked!** | Modular folder architecture (`src/components`, `src/utils`), default vs named exports, React Hooks (`useState`), Virtual DOM & Reconciliation. | [View Episode 05](./05-lets-get-hooked/README.md) |
 | **06** | **Exploring the World!** | Microservices vs Monolithic architecture, CORS, `useEffect` Hook, Swiggy Live API integration, Shimmer UI (Conditional Rendering), Controlled Components, and Search filtering. | [View Episode 06](./06-exploring-the-world/README.md) |
+| **07** | **Finding the Path!** | Image handling strategies, `useEffect` dependency rules, SPA architecture, Client vs Server-Side Routing, React Router (`createBrowserRouter`, `RouterProvider`, `Outlet`, `useRouteError`, `<Link>`, `useParams`), and Dynamic Menu APIs. | [View Episode 07](./07-finding-the-path/README.md) |
 
 ---
 
@@ -52,3 +53,9 @@ Welcome to the **Namaste React** core concepts series repository. This repositor
 ### 🌐 [Episode 06: Exploring the World!](./06-exploring-the-world/README.md)
 - **Topics Learned**: Monolithic vs Microservices architecture, Render-First-Fetch-Later strategy, `useEffect()` hook execution & dependency array, CORS errors & API proxies (`corsproxy.io` with `.env`), Shimmer UI for loading states, Conditional Rendering, React state re-rendering mechanics vs regular variables, Controlled input components, case-insensitive search and filter logic.
 - **Code Implemented**: Integrated Swiggy live REST API with CORS proxy key in `.env`, created `Shimmer` loading component, implemented conditional rendering in `Body.js`, added search input & top-rated filter buttons, dynamic image fetching via `CLOUDINARY_URL`.
+
+---
+
+### 🛣️ [Episode 07: Finding the Path!](./07-finding-the-path/README.md)
+- **Topics Learned**: Image handling techniques, `useState` return array structure, `useEffect` dependency array rules (no array vs empty vs dependency), Single Page Application (SPA) architecture, Client-Side vs Server-Side Routing comparison, React Router (`createBrowserRouter`, `RouterProvider`, `<Outlet />`, `<Link>`, `useRouteError`, `useParams`).
+- **Code Implemented**: Installed `react-router`, set up router configuration with nested routes (`About`, `Contact`, `RestaurantMenu`) and custom `Error` component, implemented `<Outlet />` for persistent layout, created dynamic route `/restaurant/:resId` fetching live menu data from Swiggy Menu API.
