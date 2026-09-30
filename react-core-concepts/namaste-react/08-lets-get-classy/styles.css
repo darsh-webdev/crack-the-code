@@ -158,3 +158,8 @@ a {
     margin: 5px 0;
     cursor: pointer;
 }
+
+.user-card {
+    padding: 10px;
+    border: 1px solid black;
+}
