@@ -163,3 +163,9 @@ a {
     padding: 10px;
     border: 1px solid black;
 }
+
+.user-card>img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
