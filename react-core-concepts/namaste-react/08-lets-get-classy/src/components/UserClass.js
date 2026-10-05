@@ -27,6 +27,13 @@ class UserClass extends React.Component {
         console.log("componentDidUpdate called")
     }
 
+    componentWillUnmount() {
+        // It is called when the component is about to be unmounted (deleted from the DOM)
+        // It is used to clear setInterval, listeners, etc.
+        // For example: If you start a timer in componentDidMount, you should clear it in componentWillUnmount
+        console.log("Component unmounted")
+    }
+
     render() {
         const { name, location, avatar_url } = this.state.userInfo
 
