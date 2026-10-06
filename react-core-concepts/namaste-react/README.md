@@ -15,6 +15,7 @@ Welcome to the **Namaste React** core concepts series repository. This repositor
 | **05** | **Let's Get Hooked!** | Modular folder architecture (`src/components`, `src/utils`), default vs named exports, React Hooks (`useState`), Virtual DOM & Reconciliation. | [View Episode 05](./05-lets-get-hooked/README.md) |
 | **06** | **Exploring the World!** | Microservices vs Monolithic architecture, CORS, `useEffect` Hook, Swiggy Live API integration, Shimmer UI (Conditional Rendering), Controlled Components, and Search filtering. | [View Episode 06](./06-exploring-the-world/README.md) |
 | **07** | **Finding the Path!** | Image handling strategies, `useEffect` dependency rules, SPA architecture, Client vs Server-Side Routing, React Router (`createBrowserRouter`, `RouterProvider`, `Outlet`, `useRouteError`, `<Link>`, `useParams`), and Dynamic Menu APIs. | [View Episode 07](./07-finding-the-path/README.md) |
+| **08** | **Let's Get Classy!** | Class-based components, `super(props)`, component lifecycle (`constructor`, `render`, `componentDidMount`, `componentDidUpdate`, `componentWillUnmount`), `useEffect` vs `async` callback rules, `createHashRouter`, and `createMemoryRouter`. | [View Episode 08](./08-lets-get-classy/README.md) |
 
 ---
 
@@ -59,3 +60,9 @@ Welcome to the **Namaste React** core concepts series repository. This repositor
 ### 🛣️ [Episode 07: Finding the Path!](./07-finding-the-path/README.md)
 - **Topics Learned**: Image handling techniques, `useState` return array structure, `useEffect` dependency array rules (no array vs empty vs dependency), Single Page Application (SPA) architecture, Client-Side vs Server-Side Routing comparison, React Router (`createBrowserRouter`, `RouterProvider`, `<Outlet />`, `<Link>`, `useRouteError`, `useParams`).
 - **Code Implemented**: Installed `react-router`, set up router configuration with nested routes (`About`, `Contact`, `RestaurantMenu`) and custom `Error` component, implemented `<Outlet />` for persistent layout, created dynamic route `/restaurant/:resId` fetching live menu data from Swiggy Menu API.
+
+---
+
+### 🎩 [Episode 08: Let's Get Classy!](./08-lets-get-classy/README.md)
+- **Topics Learned**: Class-based component syntax, `super(props)` purpose, complete class component lifecycle phases (Mounting, Updating, Unmounting), `componentDidMount` for API calls, `componentWillUnmount` for resource/timer cleanup, why `useEffect` callbacks cannot be `async`, router variants (`createHashRouter`, `createMemoryRouter`).
+- **Code Implemented**: Created `User` functional component and `UserClass` class component, refactored `About` to a class component rendering `UserClass`, fetched live GitHub user profile data (`https://api.github.com/users/darsh-webdev`) inside `componentDidMount()`, managed state updates via `this.setState()`, added lifecycle logs, and added user card styling.
