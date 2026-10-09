@@ -47,7 +47,7 @@ const Body = () => {
             </div>
             <div className="restaurant-container">
                 {listOfRestaurants.map(restaurant => (
-                    <Link key={restaurant.info.id} to={"restaurant/" + restaurant.info.id}>
+                    <Link key={restaurant.info.id} to={"/restaurant/" + restaurant.info.id}>
                         <RestaurantCard resData={restaurant.info} />
                     </Link>
 
