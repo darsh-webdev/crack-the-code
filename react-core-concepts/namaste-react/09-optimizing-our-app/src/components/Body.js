@@ -3,6 +3,7 @@ import { Link } from "react-router"
 import RestaurantCard from "./RestaurantCard"
 import Shimmer from "./Shimmer"
 import { CORS_API_KEY } from "../utils/constants"
+import useOnlineStatus from "../utils/useOnlineStatus"
 
 
 
@@ -10,6 +11,8 @@ const Body = () => {
     // Local State Variable -  Super powerful variable
     const [listOfRestaurants, setListOfRestaurants] = useState([])
     const [searchText, setSearchText] = useState("");
+
+    const onlineStatus = useOnlineStatus()
 
     // If no depdency array => useEffect runs on every render
     // If empty array => it runs only once
@@ -24,6 +27,8 @@ const Body = () => {
         const json = await data.json();
         setListOfRestaurants(json?.data?.cards[4]?.card?.card?.gridElements.infoWithStyle.restaurants)
     }
+
+    if (!onlineStatus) return <h1>It seems like you're offline! Please check your internet connection and try again!</h1>
 
 
     return listOfRestaurants.length === 0 ? (
